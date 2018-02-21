@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -27,7 +28,6 @@ public class UserDto extends Dto {
     @JsonIgnore
     private UserInformationDto info;
 
-    private Integer mark;
-
+    private Map<String, Integer> marks;
 }
 

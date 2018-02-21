@@ -34,7 +34,6 @@ public class GuestController {
         return new ResponseEntity<>(userService.save(userDto), HttpStatus.CREATED);
     }
 
-    @CrossOrigin
     @RequestMapping("/login")
     public Principal user(Principal principal) {
         return principal;

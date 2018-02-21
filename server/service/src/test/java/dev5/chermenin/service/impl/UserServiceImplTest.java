@@ -157,15 +157,15 @@ public class UserServiceImplTest {
     @Ignore
     @Test
     public void getTopUsers() throws Exception {
-        List<UserDto> users = userService.getVerifiedUsersInGroup(groupService.findAll(pageable).get(0).getId());
-        for (int i = 0; i < 5; i++) {
-            assertEquals((Integer) ((6 - i) * 10 * 3), users.get(i).getMark());
-        }
-
-        users = userService.getVerifiedUsersInGroup(groupService.findAll(pageable).get(1).getId());
-        for (int i = 0; i < 6; i++) {
-            assertEquals((Integer) ((12 - i) * 10 * 3), users.get(i).getMark());
-        }
+//        List<UserDto> users = userService.getVerifiedUsersInGroup(groupService.findAll(pageable).get(0).getId());
+//        for (int i = 0; i < 5; i++) {
+//            assertEquals((Integer) ((6 - i) * 10 * 3), users.get(i).ge());
+//        }
+//
+//        users = userService.getVerifiedUsersInGroup(groupService.findAll(pageable).get(1).getId());
+//        for (int i = 0; i < 6; i++) {
+//            assertEquals((Integer) ((12 - i) * 10 * 3), users.get(i).getMark());
+//        }
     }
 
     @Test

@@ -133,8 +133,6 @@ def generate_user_roles(count=1):
 
 if __name__ == '__main__':
 
-    if ROLES, SUBJECTS > 0:
-       raise Exception
     print(generate_roles(len(ROLES)))
     print(generate_subjects(len(SUBJECTS)))
     print(generate_universities(UNIVERSITIES_COUNT))

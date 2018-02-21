@@ -9,6 +9,9 @@ import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
  * Created by Ancarian on 11.02.2018.
  */
@@ -26,7 +29,10 @@ public class UserDtoConverter extends ConverterConfigurerSupport<User, UserDto> 
             @Override
             protected UserDto convert(User source) {
                 UserDto dto = new UserDto();
-                dto.setMark(source.getSubjects().values().stream().reduce(0, Integer::sum));
+                dto.setMarks(source.getSubjects().entrySet()
+                        .stream()
+                        .collect(Collectors.toMap(e -> e.getKey().getSubject(),
+                                Map.Entry::getValue)));
 
                 if (source.getGroup() != null) {
                     dto.setGroupId(source.getGroup().getId());
