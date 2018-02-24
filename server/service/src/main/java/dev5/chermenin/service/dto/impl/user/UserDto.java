@@ -24,10 +24,6 @@ public class UserDto extends Dto {
     @NotNull
     private String patronymic;
 
-    @Valid
-    @JsonIgnore
-    private UserInformationDto info;
-
     private Map<String, Integer> marks;
 }
 

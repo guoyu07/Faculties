@@ -48,8 +48,8 @@ public class AuthenticationHelper {
         if (Objects.isNull(token)) {
             throw new InvalidTokenAuthenticationException("Token was null or blank.");
         }
-
         // Getting JWT object from string token
+
         Jwt jwt = JwtHelper.decode(token);
 
         // Validate token signature (to be sure that token has not been tampered with)

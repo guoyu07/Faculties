@@ -62,5 +62,21 @@ public class GroupDto extends Dto {
     private List<UserScoreDto> users;
 
 
+    @Override
+    public String toString() {
+        return "GroupDto{" +
+                "countOfUsers=" + countOfUsers +
+                ", countOfAllUsers=" + countOfAllUsers +
+                ", information='" + information + '\'' +
+                ", issueDate=" + issueDate +
+                ", validTill=" + validTill +
+                ", subjectNames=" + subjectNames +
+                ", limit=" + limit +
+                ", enrollMark=" + enrollMark +
+                ", qualify='" + qualify + '\'' +
+                ", facultyId=" + facultyId +
+                ", users=" + users +
+                '}';
+    }
 }
 

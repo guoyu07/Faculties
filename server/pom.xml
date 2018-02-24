@@ -86,6 +86,7 @@
             <artifactId>log4j</artifactId>
             <version>1.2.12</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -111,7 +112,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
                 <configuration>
+                    <compilerVersion>1.8</compilerVersion>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>

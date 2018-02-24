@@ -16,6 +16,12 @@
 *.launch
 .settings/
 *.sublime-workspace
+### IntelliJ ###
+*.iml
+*.ipr
+*.iws
+.idea/
+
 
 # IDE - VSCode
 .vscode/*

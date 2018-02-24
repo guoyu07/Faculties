@@ -1,12 +1,15 @@
 package dev5.chermenin.service.util.converters;
 
+import dev5.chermenin.model.entity.BaseObj;
+import dev5.chermenin.service.dto.Dto;
+
 import java.util.List;
 
 /**
  * Created by Ancarian on 02.12.2017.
  */
 
-public interface Converter<T, K> {
+public interface Converter<T extends Dto, K extends BaseObj> {
     T convertToDto(K baseObj);
 
     K convertToEntity(T dto);

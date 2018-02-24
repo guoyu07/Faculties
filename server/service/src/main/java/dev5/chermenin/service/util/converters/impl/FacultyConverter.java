@@ -18,7 +18,6 @@ public class FacultyConverter extends AbstractConverter<FacultyDto, Faculty> {
 
     public FacultyDto convertToDto(Faculty faculty) {
         FacultyDto facultyDto = this.modelMapper.map(faculty, FacultyDto.class);
-        facultyDto.setUniversityId(faculty.getUniversity().getId());
         return facultyDto;
     }
 

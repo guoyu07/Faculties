@@ -35,7 +35,7 @@ public class GroupController {
     @JsonView(View.Enable.class)
     @ApiOperation(value = "get all groups")
     @RequestMapping(value = "/groups", method = RequestMethod.GET)
-    public ResponseEntity<List<GroupDto>> allGroups(Pageable pageable) throws JsonProcessingException {
+    public ResponseEntity<List<GroupDto>> allGroups(Pageable pageable) {
         List<GroupDto> groupDtos = groupService.findAll(pageable);
         return new ResponseEntity<>(groupDtos, HttpStatus.OK);
     }

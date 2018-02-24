@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @ApiOperation(value = "add request", authorizations = {@Authorization(value = "basicAuth")})
     @RequestMapping(value = "/{userId}/{groupId}", method = RequestMethod.PUT, name = "")
     public ResponseEntity<UserDto> addRequest(@PathVariable(value = "userId") long userId, @PathVariable(value = "groupId") long groupId) {
@@ -49,6 +51,7 @@ public class UserController {
         return new ResponseEntity<>(userService.findById(userId), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "find user by Id", authorizations = {@Authorization(value = "basicAuth")})
     @RequestMapping(value = "/id/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserDto> findById(@PathVariable(value = "userId") long userId) {
@@ -56,18 +59,21 @@ public class UserController {
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "find user by name", authorizations = {@Authorization(value = "basicAuth")})
     @RequestMapping(value = "/name/{userName}", method = RequestMethod.GET)
     public ResponseEntity<UserDto> findByName(@PathVariable(value = "userName") String userName) {
         return new ResponseEntity<>(userService.findById(userInformationService.findByNickname(userName).getId()), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "get all users")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<List<UserDto>> allUsers(Pageable pageable) {
         return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "remove user", authorizations = {@Authorization(value = "basicAuth")})
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
     public ResponseEntity removeUser(@PathVariable(value = "userId") long id) {
@@ -75,6 +81,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "update user", authorizations = {@Authorization(value = "basicAuth")})
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity updateUser(@Valid @RequestBody ProfileUserDto userDto) {
@@ -82,6 +89,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "get profile user", authorizations = {@Authorization(value = "basicAuth")})
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ResponseEntity<ProfileUserDto> getProfile() {

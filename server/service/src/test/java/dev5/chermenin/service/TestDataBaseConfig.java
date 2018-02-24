@@ -5,10 +5,12 @@ package dev5.chermenin.service;
  */
 
 import dev5.chermenin.model.entity.impl.*;
+import dev5.chermenin.service.dto.impl.FacultyDto;
 import dev5.chermenin.service.dto.impl.GroupDto;
 
 import dev5.chermenin.service.dto.impl.user.UserDto;
 import dev5.chermenin.service.dto.impl.user.UserScoreDto;
+import dev5.chermenin.service.util.converters.modelMapperConverter.FacultyDtoConverter;
 import dev5.chermenin.service.util.converters.modelMapperConverter.GroupDtoConverter;
 import dev5.chermenin.service.util.converters.modelMapperConverter.UserDtoConverter;
 import dev5.chermenin.service.util.converters.modelMapperConverter.UserScoreDtoConverter;
@@ -42,6 +44,9 @@ public class TestDataBaseConfig {
                 .setConverter(new GroupDtoConverter(modelMapper).converter());
 
         modelMapper.createTypeMap(User.class, UserScoreDto.class).setConverter(new UserScoreDtoConverter().converter());
+        modelMapper.createTypeMap(Faculty.class, FacultyDto.class).setConverter(new FacultyDtoConverter(modelMapper).converter());
+
+
         return modelMapper;
     }
 }

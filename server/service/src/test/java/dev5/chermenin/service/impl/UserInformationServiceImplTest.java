@@ -31,12 +31,12 @@ public class UserInformationServiceImplTest {
 
     @Test
     public void findById() throws Exception {
-        assertEquals(infoService.findById(1).getId(), new Long(1));
+        assertEquals(infoService.findById(1L).getId(), new Long(1));
     }
 
     @Test(expected = NotFoundException.class)
     public void findByNotExistsId() throws Exception {
-        infoService.findById(1000);
+        infoService.findById(1000L);
     }
 
     @Test
@@ -71,36 +71,36 @@ public class UserInformationServiceImplTest {
     @Test(expected = NotFoundException.class)
     public void changeEmailNotExistUserInformation(){
 
-        infoService.changeEmail(1000, "oldEmail@gmail.com", "newEmail@gmail.com");
+        infoService.changeEmail(1000L, "oldEmail@gmail.com", "newEmail@gmail.com");
     }
     @Test(expected = ExistsException.class)
     public void changeExistsEmailUserInformation(){
 
-        infoService.changeEmail(1, "oldEmail@gmail.com", "email_1");
+        infoService.changeEmail(1L, "oldEmail@gmail.com", "email_1");
     }
     @Test(expected = ConflictException.class)
     public void changeInvalidEmailUserInformation(){
-        infoService.changeEmail(2, "invalidOldEmail@gmail.com", "newEmail@gmail.com");
+        infoService.changeEmail(2L, "invalidOldEmail@gmail.com", "newEmail@gmail.com");
     }
     @Test
     public void changeEmailUserInformation(){
-        infoService.changeEmail(2, "oldEmail@gmail.com", "newEmail@gmail.com");
-        assertEquals(infoService.findById(2).getEmail(), "newEmail@gmail.com");
+        infoService.changeEmail(2L, "oldEmail@gmail.com", "newEmail@gmail.com");
+        assertEquals(infoService.findById(2L).getEmail(), "newEmail@gmail.com");
     }
 
     @Test(expected = NotFoundException.class)
     public void changePasswordNotExistUserInformation(){
 
-        infoService.changePassword(1000, "oldPassword", "newPassword");
+        infoService.changePassword(1000L, "oldPassword", "newPassword");
     }
     @Test(expected = ConflictException.class)
     public void changeInvalidPasswordUserInformation(){
-        infoService.changePassword(2, "invalidOldPassword", "newPassword");
+        infoService.changePassword(2L, "invalidOldPassword", "newPassword");
     }
     @Test
     public void changePasswordUserInformation(){
-        infoService.changePassword(2, "oldPassword", "newPassword");
-        assertEquals(infoService.findById(2).getPassword(), "newPassword");
+        infoService.changePassword(2L, "oldPassword", "newPassword");
+        assertEquals(infoService.findById(2L).getPassword(), "newPassword");
     }
 
 }

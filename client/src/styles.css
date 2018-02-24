@@ -1,93 +1,217 @@
-@import "~bootstrap/dist/css/bootstrap.min.css";
-@import "~font-awesome/css/font-awesome.css";
-
-h1 {
-  font-family: 'Roboto', sans-serif;
-}
-
-h2 {
-  font-family: 'Roboto', sans-serif;
-}
-
-h3 {
-  font-family: 'Roboto', sans-serif;
-}
-
-h4 {
-  font-family: 'Roboto', sans-serif;
-}
-
-h5 {
-  font-family: 'Roboto', sans-serif;
-}
-
-h6 {
-  font-family: 'Roboto', sans-serif;
-}
-
-p {
-  font-family: 'Roboto', sans-serif;
-}
-
-.selected {
-  color: #74B9A8;
-}
-
-.table-header {
-  color: #685D6A;
-}
-.header-image{
-  width: 65px;
-  height: 65px;
-  padding: 5px;
-}
-.not-selected {
-  color: #F4828C;
-}
-
-.text-color {
-  color: #685D6A;
-}
-body{
-  background-color: #74B9A8;
-}
-
-.green {
-  margin: 0 auto;
-  background-color: #74B9A8;
-  padding: -20px;
-}
-
-.my_container {
-  background-color: #F0F0F1;
-  padding: 10px;
-  max-width: 1300px;
-  margin: 20px auto;
-
-  box-shadow: inset 0 0 10px #000000;
-}
-
-.button-container{
-  min-width: 80px;
-}
-.btn{
-  min-width: 100px;
+/*BUTTONS*/
+.btn {
+  border-radius: 0 !important;
+  width: 100px;
+  height: 35px;
 }
 
 .btn-danger {
-  border-radius: 0;
-  border-width: 0;
-  background-color: #F4828C;;
+  border: 2px solid #F4828C;
+  background-color: transparent !important;
+  color: #F4828C;
 }
 
-.btn-success{
+.btn-success {
+  border: 2px solid #74B9A8;
   border-radius: 0;
-  border-width: 0;
-  background-color: #74B9A8;
+  background-color: transparent !important;
+  color: #74B9A8;
 }
 
-table.select_row tr:hover td {
-  transform: scale(1.2);
-  transition: .5s all;
-  z-index: 1000;
+.btn-danger:hover {
+  color: #F4828C;
+}
+
+.btn-success:hover {
+  color: #74B9A8;
+}
+
+h1 {
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/*TABLE*/
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tbl-header {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tbl-content {
+  margin-top: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+th {
+  font-family: 'Open Sans', sans-serif;
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+td {
+  font-family: 'Open Sans', sans-serif;
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 14px;
+  color: white;
+  border-bottom: solid 3px rgba(255, 255, 255, 0.1);
+}
+
+/* demo styles */
+
+section {
+  margin: 50px;
+}
+
+/* follow me template */
+.made-with-love {
+  margin-top: 40px;
+  padding: 10px;
+  clear: left;
+  text-align: center;
+  font-size: 10px;
+  font-family: arial;
+  color: #fff;
+}
+
+.made-with-love i {
+  font-style: normal;
+  color: #F50057;
+  font-size: 14px;
+  position: relative;
+  top: 2px;
+}
+
+.made-with-love a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.made-with-love a:hover {
+  text-decoration: underline;
+}
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  background: #456;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+/*FOOTER*/
+
+html, body {
+  height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -142px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  /* .push must be the same height as footer */
+  height: 142px;
+}
+.site-footer {
+ padding: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* LINKS */
+
+.nav {
+  margin:0 auto;
+  width: 450px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.nav ul,
+.nav li {
+  margin:0 0;
+  padding:0 0;
+  list-style:none;
+}
+
+.nav ul {
+  height:30px;
+  padding:4px 0 0;
+}
+
+.nav li {
+
+  float:left;
+  display:inline;
+  padding:5px 10px;
+  /* the tiny border */
+  border-left:1px solid #ccc;
+  border-right:1px solid white;
+}
+
+.nav li:first-child {border-left:none}
+.nav li:last-child {border-right:none}
+
+.nav a {
+  color: white;
+  font-size: 16px;
+  display:block;
+  line-height:20px;
+  height:20px;
+  padding:0 15px 2px;
+  border-radius:15px/25px;
+}
+
+/* the hover effect */
+.nav a:hover {
+  color:#74B9A8;
+  text-shadow:none;
+}
+
+
+/* */
+
+.selected{
+  color:#74B9A8;
+}
+
+
+/* SELECTION */
+
+::selection {
+  background: transparent;
+  color: #F4828C;
 }

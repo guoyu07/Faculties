@@ -7,6 +7,7 @@ import dev5.chermenin.service.dto.impl.user.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -26,6 +27,7 @@ public class AuthenticationController {
         return authenticationService.login(loginRequestDto);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/me")
     @ResponseStatus(value = HttpStatus.OK)
     public UserDto me() {

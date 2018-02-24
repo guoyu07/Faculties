@@ -43,7 +43,9 @@ public class GroupDtoConverter extends ConverterConfigurerSupport<Group, GroupDt
                     groupDto.setUsers(userDtoSet);
                 }
 
-                groupDto.setSubjectNames(source.getSubjects().stream().map(Subject::getSubject).collect(toSet()));
+                if (source.getSubjects() != null) {
+                    groupDto.setSubjectNames(source.getSubjects().stream().map(Subject::getSubject).collect(toSet()));
+                }
                 groupDto.setValidTill(source.getValidTill());
                 groupDto.setInformation(source.getInformation());
                 groupDto.setIssueDate(source.getIssueDate());
@@ -51,6 +53,8 @@ public class GroupDtoConverter extends ConverterConfigurerSupport<Group, GroupDt
                 groupDto.setCountOfUsers(source.getCountOfUsers());
                 groupDto.setEnrollMark(source.getEnrollMark());
                 groupDto.setLimit(source.getLimit());
+                groupDto.setQualify(source.getQualify());
+                groupDto.setFacultyId(source.getFaculty().getId());
                 groupDto.setId(source.getId());
 
                 return groupDto;

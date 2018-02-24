@@ -4,7 +4,7 @@ import dev5.chermenin.service.dto.Dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +13,7 @@ public class FacultyDto extends Dto {
 
     private String information;
 
-    private Set<GroupDto> groups;
+    private List<GroupDto> groups;
 
     private long universityId;
 

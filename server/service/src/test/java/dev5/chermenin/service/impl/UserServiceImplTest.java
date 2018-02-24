@@ -69,11 +69,8 @@ public class UserServiceImplTest {
     @Test
     public void save() throws Exception {
         ProfileUserDto user = new ProfileUserDto();
-
         Map<String, Integer> subjects = new HashMap<>();
-
         subjects.put("certificate", 50);
-
         user.setMarks(subjects);
 
         UserInformationDto information = new UserInformationDto();

@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @EqualsAndHashCode
 public class Subject extends BaseObj {
 
-    @Column(name = "subject", unique = true)
+    @Column(name = "subject", unique = true, nullable = false)
     private String subject;
 }
-

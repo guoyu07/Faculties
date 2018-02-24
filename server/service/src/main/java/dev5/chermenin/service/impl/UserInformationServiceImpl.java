@@ -32,7 +32,7 @@ public class UserInformationServiceImpl implements UserInformationService {
     }
 
     @Override
-    public UserInformationDto findById(long id) {
+    public UserInformationDto findById(Long id) {
         if (!userInformationRepository.exists(id)) {
             logger.error("user's information not found");
             throw new NotFoundException("user's information not found");
@@ -76,7 +76,7 @@ public class UserInformationServiceImpl implements UserInformationService {
 
     @Transactional
     @Override
-    public void changePassword(long userId, String oldPassword, String newPassword) {
+    public void changePassword(Long userId, String oldPassword, String newPassword) {
         if (!userInformationRepository.exists(userId)) {
             logger.error("user's information not found");
             throw new NotFoundException("user's information not found");
@@ -92,7 +92,7 @@ public class UserInformationServiceImpl implements UserInformationService {
 
     @Transactional
     @Override
-    public void changeEmail(long userId, String oldEmail, String newEmail) {
+    public void changeEmail(Long userId, String oldEmail, String newEmail) {
         if (!userInformationRepository.exists(userId)) {
             logger.error("user's information not found");
             throw new NotFoundException("user's information not found");
@@ -111,5 +111,13 @@ public class UserInformationServiceImpl implements UserInformationService {
         }
 
         userInformation.setEmail(newEmail);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public UserInformation findUserInfoById(Long id) {
+        UserInformation userInformation = userInformationRepository.findOne(id);
+        System.out.println(userInformation.getRoles());
+        return userInformation;
     }
 }

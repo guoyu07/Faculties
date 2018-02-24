@@ -42,8 +42,7 @@ public class UserDtoConverter extends ConverterConfigurerSupport<User, UserDto> 
                 dto.setLastname(source.getLastname());
                 dto.setPatronymic(source.getPatronymic());
                 dto.setId(source.getId());
-
-                dto.setInfo(modelMapper.map(source.getInfo(), UserInformationDto.class));
+                //dto.setInfo(modelMapper.map(source.getInfo(), UserInformationDto.class));
                 return dto;
             }
         };

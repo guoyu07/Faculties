@@ -144,7 +144,6 @@ public class UserServiceImpl implements UserService {
     public void selectGroup(long userId, long groupId) {
         if (groupRepository.exists(groupId)) {
             User user = userRepository.findOne(userId);
-            ;
             user.setGroup(groupRepository.findOne(groupId));
             user.getInfo().getRoles().remove(Roles.VERIFIED);
 

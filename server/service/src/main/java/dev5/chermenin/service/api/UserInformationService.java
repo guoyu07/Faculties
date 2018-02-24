@@ -1,16 +1,19 @@
 package dev5.chermenin.service.api;
 
+import dev5.chermenin.model.entity.impl.UserInformation;
 import dev5.chermenin.service.dto.impl.user.UserInformationDto;
 
 public interface UserInformationService {
-    UserInformationDto findById(long id);
+    UserInformationDto findById(Long id);
 
     UserInformationDto findByNickname(String nickname);
 
     UserInformationDto findByEmail(String email);
 
-    void changePassword(long id, String password, String oldPassword);
+    UserInformation findUserInfoById(Long id);
 
-    void changeEmail(long id, String email, String oldEmail);
+    void changePassword(Long id, String password, String oldPassword);
+
+    void changeEmail(Long id, String email, String oldEmail);
 }
 

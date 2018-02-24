@@ -1,5 +1,8 @@
 package dev5.chermenin.rest.config;
 
+import dev5.chermenin.rest.security.handler.RestAccessDeniedHandler;
+import dev5.chermenin.rest.security.handler.RestAuthenticationEntryPoint;
+import dev5.chermenin.rest.security.service.JwtAuthenticationFilter;
 import dev5.chermenin.rest.security.service.JwtAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,9 +15,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
  * Created by Ancarian on 20.12.2017.
@@ -99,21 +104,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .accessDeniedHandler(new RestAccessDeniedHandler());
 //        //.antMatchers("/swagger-ui.html").permitAll();
 
-        http.csrf().disable();
+        http.csrf().disable().
 
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers(AUTH_WHITELIST)
-//                .permitAll()
-//                .and()
-//                .csrf().disable()
-//                .addFilterAfter(new JwtAuthenticationFilter(authenticationManagerBean()),
-//                        BasicAuthenticationFilter.class)
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-//                .accessDeniedHandler(new RestAccessDeniedHandler());
+        sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(AUTH_WHITELIST)
+                .permitAll()
+                .and()
+                .csrf().disable()
+                .addFilterAfter(new JwtAuthenticationFilter(authenticationManagerBean()),
+                        BasicAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .accessDeniedHandler(new RestAccessDeniedHandler());
     }
 
     @Override

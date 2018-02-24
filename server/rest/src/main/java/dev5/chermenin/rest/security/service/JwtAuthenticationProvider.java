@@ -1,17 +1,23 @@
 package dev5.chermenin.rest.security.service;
 
+import dev5.chermenin.dao.repository.UserInformationRepository;
 import dev5.chermenin.dao.repository.UserRepository;
 import dev5.chermenin.model.entity.impl.User;
+import dev5.chermenin.model.entity.impl.UserInformation;
 import dev5.chermenin.rest.security.exception.ExpiredTokenAuthenticationException;
 import dev5.chermenin.rest.security.exception.InvalidTokenAuthenticationException;
 import dev5.chermenin.rest.security.model.JwtAuthenticationToken;
 import dev5.chermenin.rest.security.model.JwtUserDetails;
 import dev5.chermenin.rest.security.model.TokenPayload;
+import dev5.chermenin.service.api.UserInformationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -23,12 +29,12 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     private static final long MILLIS_IN_SECOND = 1000L;
 
-    private final UserRepository userRepository;
+    private final UserInformationService userInformationService;
     private final AuthenticationHelper authenticationHelper;
 
     @Autowired
-    public JwtAuthenticationProvider(UserRepository userRepository, AuthenticationHelper authenticationHelper) {
-        this.userRepository = userRepository;
+    public JwtAuthenticationProvider(UserInformationService userInformationService, AuthenticationHelper authenticationHelper) {
+        this.userInformationService = userInformationService;
         this.authenticationHelper = authenticationHelper;
     }
 
@@ -50,13 +56,15 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         }
 
         // Getting user from database
-        User user = userRepository.findOne(userEntityId);
-        if (Objects.isNull(user)) {
+        UserInformation userInformation = userInformationService.findUserInfoById(userEntityId);
+
+        if (Objects.isNull(userInformation)) {
             throw new InvalidTokenAuthenticationException("Token does not contain existed user id.");
         }
 
+
         // Return authenticated Authentication
-        JwtUserDetails userDetails = new JwtUserDetails(user.getInfo());
+        JwtUserDetails userDetails = new JwtUserDetails(userInformation);
         return new JwtAuthenticationToken(userDetails);
     }
 

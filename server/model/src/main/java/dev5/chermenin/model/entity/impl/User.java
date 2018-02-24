@@ -15,20 +15,20 @@ import java.util.Map;
 @EqualsAndHashCode
 public class User extends BaseObj {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "lastname")
+    @Column(name = "lastname", nullable = false)
     private String lastname;
 
-    @Column(name = "patronymic")
+    @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "groups_id")
     private Group group;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     private UserInformation info;
 
@@ -39,4 +39,3 @@ public class User extends BaseObj {
     private Map<Subject, Integer> subjects;
 
 }
-

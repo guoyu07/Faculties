@@ -1,0 +1,52 @@
+<a routerLink="/" routerLinkActive="active">Main</a>
+<a routerLink="/user" routerLinkActive="active">Users</a>
+<a routerLink="/user/create" routerLinkActive="active">New User</a>
+
+
+<div class="container">
+  <section>
+    <h1>Users</h1>
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Patronymic</th>
+          <th>Group id</th>
+          <th>Score</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.name}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.patronymic}}</td>
+          <td [ngClass]="{'selected': user.groupId != null}">{{user.groupId }}</td>
+          <td>{{user.mark}}</td>
+
+          <td>
+            <button type="button" class="btn btn-success" (click)="getProfile(user)">Profile</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success">Edit</button>
+          </td>
+
+          <td>
+
+            <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

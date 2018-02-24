@@ -1,0 +1,42 @@
+import {Injectable} from '@angular/core';
+
+import {Observable} from "rxjs/Observable";
+import {User} from "../models/dto/User";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import {HttpClient} from "@angular/common/http";
+import {HttpHeaders} from "@angular/common/http";
+
+@Injectable()
+export class UserService {
+
+  private apiUrl = 'http://localhost:9000/users';
+  private headers: HttpHeaders = new HttpHeaders({
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${localStorage.getItem('token')}`
+});
+  constructor(private http: HttpClient) {
+  }
+
+  findAll(): Observable<User[]> {
+    return this.http.get(this.apiUrl, {headers: this.headers});
+  }
+
+  findById(id: number): Observable<User> {
+    return this.http.get(this.apiUrl + '/id/' + id, {headers: this.headers});
+  }
+
+  saveUser(user: User): Observable<Object> {
+    return this.http.post(this.apiUrl, user)
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  deleteUserById(id: number){
+    return this.http.delete(this.apiUrl + '/' + id, {headers: this.headers});
+  }
+
+  updateUser(user: User): Observable<User> {
+    return null;
+  }
+
+}

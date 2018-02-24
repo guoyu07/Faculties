@@ -20,16 +20,16 @@ public class UserInformation extends BaseObj {
     @Column(name = "date_of_registration")
     private Date dateOfRegistration;
 
-    @Column(name = "nickname")
+    @Column(name = "nickname", nullable = false, unique = true)
     private String nickname;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @ElementCollection(targetClass = Roles.class)
+    @ElementCollection(targetClass = Roles.class, fetch = FetchType.LAZY)
     @Enumerated(value = EnumType.ORDINAL)
     @CollectionTable(name = "user_information_roles", joinColumns = {@JoinColumn(name = "user_information_id")})
     @Column(name = "roles")
@@ -37,4 +37,3 @@ public class UserInformation extends BaseObj {
 
 
 }
-

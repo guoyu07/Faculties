@@ -46,7 +46,7 @@ public class StatisticServiceImpl implements StatisticService {
     @Override
     public List<GroupDto> getTopGroupsByMark(Pageable pageable) {
         List<GroupDto> groups = groupService.findAll(pageable);
-        groups.sort(Comparator.comparing(GroupDto::getEnrollMark).reversed());
+        groups.sort(Comparator.comparing(GroupDto::getEnrollMark));
         return groups;
     }
 

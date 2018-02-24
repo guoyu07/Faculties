@@ -1,8 +1,10 @@
 package dev5.chermenin.service.impl;
 
+import dev5.chermenin.dao.repository.FacultyRepository;
 import dev5.chermenin.dao.repository.GroupRepository;
 import dev5.chermenin.dao.repository.UserRepository;
 import dev5.chermenin.model.entity.impl.Group;
+import dev5.chermenin.service.api.FacultyService;
 import dev5.chermenin.service.api.GroupService;
 import dev5.chermenin.service.dto.impl.GroupDto;
 import dev5.chermenin.service.exceptions.ExistsException;
@@ -23,13 +25,15 @@ import java.util.List;
 public class GroupServiceImpl implements GroupService {
     private UserRepository userRepository;
     private GroupRepository groupRepository;
+    private FacultyRepository facultyRepository;
     private Converter<GroupDto, Group> groupConverter;
     private Logger logger = LoggerFactory.getLogger(GroupServiceImpl.class);
 
     @Autowired
-    public GroupServiceImpl(UserRepository userRepository, GroupRepository groupRepository, Converter<GroupDto, Group> groupConverter) {
+    public GroupServiceImpl(UserRepository userRepository, GroupRepository groupRepository, FacultyRepository facultyRepository, Converter<GroupDto, Group> groupConverter) {
         this.userRepository = userRepository;
         this.groupRepository = groupRepository;
+        this.facultyRepository = facultyRepository;
         this.groupConverter = groupConverter;
     }
 
@@ -61,8 +65,10 @@ public class GroupServiceImpl implements GroupService {
         group.setLimit(groupDto.getLimit());
         group.setValidTill(groupDto.getValidTill());
         group.setIssueDate(groupDto.getIssueDate());
-        group.setSubjects(new HashSet<>());
-        group.setUsers(new ArrayList<>());
+        group.setSubjects(null);
+        group.setUsers(null);
+        group.setQualify(groupDto.getQualify());
+        group.setFaculty(facultyRepository.findOne(groupDto.getFacultyId()));
 
         groupDto = this.groupConverter.convertToDto(this.groupRepository.save(group));
         this.logger.info("group with id: {} saved", groupDto.getId());
@@ -108,8 +114,8 @@ public class GroupServiceImpl implements GroupService {
     public List<GroupDto> findAll(Pageable pageable) {
         List<Group> groups = this.groupRepository.findAll(pageable).getContent();
         this.logger.info("all groups found");
-        groups.forEach(group -> group.setUsers(null));
 
+        groups.forEach(group -> group.setUsers(null));
         return this.groupConverter.convertToDto(groups);
     }
 

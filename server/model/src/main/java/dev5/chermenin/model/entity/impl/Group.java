@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name = "groups")
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Group extends BaseObj {
 
     @Column(name = "count_of_users")
@@ -32,13 +31,13 @@ public class Group extends BaseObj {
     @Column(name = "valid_till")
     private Date validTill;
 
-    @Column(name = "count")
+    @Column(name = "count", nullable = false)
     private int limit;
 
     @Column(name = "enroll_mark")
     private int enrollMark;
 
-    @Column(name = "qualify")
+    @Column(name = "qualify", nullable = false)
     private String qualify;
 
     @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
@@ -55,4 +54,3 @@ public class Group extends BaseObj {
 
 
 }
-

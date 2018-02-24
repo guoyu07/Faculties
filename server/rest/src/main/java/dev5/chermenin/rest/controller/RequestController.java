@@ -33,14 +33,12 @@ public class RequestController {
     @ApiOperation(value = "get requests")
     @RequestMapping(value = {"/requests"}, method = RequestMethod.GET)
     public ResponseEntity<List<UserDto>> requests() {
-
         return new ResponseEntity<>(userService.getRequests(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "confirm request")
     @RequestMapping(value = "/requests/{userId}/confirm", method = RequestMethod.PUT)
     public ResponseEntity confirmRequest(@PathVariable(value = "userId") long userId) {
-
         userService.changeStateOfRequest(userId, true);
         return new ResponseEntity<>(HttpStatus.OK);
     }

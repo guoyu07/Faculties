@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "faculties")
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Faculty extends BaseObj {
 
     @Column(name = "name", unique = true, nullable = false)
@@ -21,12 +21,11 @@ public class Faculty extends BaseObj {
     @Column(name = "information", unique = true, nullable = false)
     private String information;
 
-    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
-    private Set<Group> groups;
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "faculty", fetch = FetchType.LAZY)
+    private List<Group> groups;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "universities_id", nullable = false)
     private University university;
 
 }
-

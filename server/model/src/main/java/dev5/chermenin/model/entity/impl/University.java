@@ -15,12 +15,12 @@ import java.util.Set;
 @EqualsAndHashCode
 public class University extends BaseObj {
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(name = "moderators", joinColumns = {@JoinColumn(name = "faculties_id")},
             inverseJoinColumns = {@JoinColumn(name = "users_id")})
     private Set<User> moderators;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "university", fetch = FetchType.LAZY)
@@ -28,4 +28,3 @@ public class University extends BaseObj {
 
 
 }
-

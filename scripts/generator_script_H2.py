@@ -12,8 +12,8 @@ FACULTIES_COUNT = 3
 GROUPS_COUNT = 3
 USERS_COUNT = 1000
 
-
 def get_insert_template(template=""):
+
     return '{0} {1}'.format('INSERT INTO', template)
 
 
