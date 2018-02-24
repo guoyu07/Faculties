@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http} from "@angular/http";
-import {User} from "../models/user";
-import "rxjs/add/operator/toPromise";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from '@angular/http';
+import {User} from '../models/user';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: Http) {
   }
 
-  login(user: User): Promise<any> {
+  login(user: Object): Promise<any> {
     let url: string = `${this.BASE_URL}/login`;
     return this.http.post(url, user, {headers: this.headers}).toPromise();
   }
@@ -19,7 +19,7 @@ export class AuthService {
 
   register(user: User): Promise<any> {
     let url: string = `${this.BASE_URL}/register`;
-    return this.http.post(url, user, {headers: this.headers}).toPromise()
+    return this.http.post(url, user, {headers: this.headers}).toPromise();
   }
 
   ensureAuthenticated(token): Promise<any> {

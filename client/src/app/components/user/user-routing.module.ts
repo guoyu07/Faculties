@@ -6,7 +6,7 @@ import {StatusComponent} from './status/status.component';
 import {LoginRedirect} from '../../services/login-redirect.service';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
-import {UserComponent} from "./user/user.component";
+import {UserComponent} from './user/user.component';
 
 const routes: Routes = [
   {path: 'user', component: UserListComponent},

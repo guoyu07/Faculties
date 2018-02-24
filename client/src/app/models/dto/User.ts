@@ -5,27 +5,25 @@
 //   "name": "string",
 //   "patronymic": "string"
 
-import {UserInformation} from "./UserInformation";
+import {UserInformation} from './UserInformation';
 
-export class User{
+export class User {
   id: number;
   lastname: string;
-  mark: number;
+  marks: Object;
   name: string;
   patronymic: string;
   info: UserInformation;
   groupId: number;
 
 
-  constructor(id: number, lastname: string, mark: number, name: string, patronymic: string, info: UserInformation, groupId: number) {
+  constructor(id: number, lastname: string, marks: Object, name: string, patronymic: string, info: UserInformation, groupId: number) {
     this.id = id;
     this.lastname = lastname;
-    this.mark = mark;
+    this.marks = marks;
     this.name = name;
     this.patronymic = patronymic;
     this.info = info;
     this.groupId = groupId;
   }
-
-
 }

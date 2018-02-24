@@ -30,7 +30,7 @@
           <td>{{user.lastname}}</td>
           <td>{{user.patronymic}}</td>
           <td [ngClass]="{'selected': user.groupId != null}">{{user.groupId }}</td>
-          <td>{{user.mark}}</td>
+          <td>{{user.score}}</td>
 
           <td>
             <button type="button" class="btn btn-success" (click)="getProfile(user)">Profile</button>

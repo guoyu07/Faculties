@@ -5,11 +5,13 @@ import {User} from '../models/dto/User';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Group} from '../models/dto/Group';
+
 
 @Injectable()
-export class UserService {
+export class GroupService {
 
-  private apiUrl = 'http://localhost:9000/users';
+  private apiUrl = 'http://localhost:9000/groups';
   private headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -18,16 +20,16 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  findAll(): Observable<User[]> {
+  findAll(): Observable<Group[]> {
     return this.http.get(this.apiUrl, {headers: this.headers});
   }
 
-  findById(id: number): Observable<User> {
-    return this.http.get(this.apiUrl + '/id/' + id, {headers: this.headers});
+  findById(id: number): Observable<Group> {
+    return this.http.get(this.apiUrl + '/' + id, {headers: this.headers});
   }
 
-  saveUser(user: User): Observable<Object> {
-    return this.http.post(this.apiUrl, user)
+  saveUser(group: Group): Observable<Object> {
+    return this.http.post(this.apiUrl, group)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
@@ -35,7 +37,7 @@ export class UserService {
     return this.http.delete(this.apiUrl + '/' + id, {headers: this.headers});
   }
 
-  updateUser(user: User): Observable<User> {
+  updateUser(group: Group): Observable<User> {
     return null;
   }
 

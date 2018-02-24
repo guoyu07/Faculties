@@ -1,0 +1,42 @@
+<div class="group-container">
+  <div class="col s12 m7">
+    <h2 class="header">{{group.information}}</h2>
+    <div class="card horizontal greenn">
+
+      <div class="info">
+        <p>limit: {{group.limit}}</p>
+        <p>qualify: {{group.qualify}}</p>
+        <p>issue date: {{group.issueDate}}</p>
+        <p>valid till: {{ group.issueDate}}</p>
+        <p>faculty id: {{ group.facultyId}}</p>
+        <div class="line-separator"></div>
+        <p>Subjects:</p>
+        <p *ngFor="let subject of group.subjectNames"> {{subject}}</p>
+      </div>
+
+      <div class="card-stacked">
+        <div class="card-content">
+          <p>программирование используется в технической и в научной областях.
+
+            В технике выделяются: средняя техническая квалификация техник-программист (ранее «программист-лаборант») и
+            высшая техническая квалификация инженер-программист. Предметом деятельности специалистов с соответствующей
+            квалификацией (техников и инженеров) является проектирование, разработка и производство программного
+            обеспечения, как промышленной продукции, удовлетворяющей заданным функциональным, конструктивным и
+            технологическим требованиям (результатом деятельности является программное обеспечение). В России подготовка
+            инженеров-программистов ведётся по профилю подготовки «Программное обеспечение вычислительной техники и
+            автоматизированных систем» направления «Информатика и вычислительная техника»[1].
+
+            Существует подготовка математиков-программистов по направлению «Математическое обеспечение и
+            администрирование информационных систем»[2]. </p>
+        </div>
+        <div class="card-action">
+          <span>User's score list: </span><span *ngFor="let user of group.users ; let rowIndex=index"
+                                                [ngClass]="{'score': group.limit>rowIndex, 'loh': group.limit <= rowIndex}"> {{user.score}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

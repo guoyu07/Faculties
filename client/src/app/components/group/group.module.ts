@@ -10,22 +10,23 @@ import {StatusComponent} from './status/status.component';
 import {RegisterComponent} from './register/register.component';
 import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
-import {UserComponent} from './user/user.component';
+import {GroupRoutingModule} from './group-routing.module';
+import {GroupComponent} from './group/group.component';
+import {GroupListComponent} from './group-list/group-list.component';
+import {GroupService} from '../../services/group.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    UserRoutingModule,
+    GroupRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  declarations: [UserListComponent,
-    UserComponent,
-    LoginComponent,
-    RegisterComponent,
-    StatusComponent],
-  providers: [AuthService, UserService]
+  declarations: [GroupComponent,
+    GroupListComponent],
+
+  providers: [AuthService, UserService, GroupService]
 })
-export class UserModule {
+export class GroupModule {
 }
