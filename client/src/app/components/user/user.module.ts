@@ -11,6 +11,7 @@ import {RegisterComponent} from './register/register.component';
 import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
 import {UserComponent} from './user/user.component';
+import {JwtService} from "../../services/jwt.service";
 
 @NgModule({
   imports: [
@@ -25,7 +26,7 @@ import {UserComponent} from './user/user.component';
     LoginComponent,
     RegisterComponent,
     StatusComponent],
-  providers: [AuthService, UserService]
+  providers: [AuthService, UserService, JwtService]
 })
 export class UserModule {
 }

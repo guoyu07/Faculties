@@ -1,7 +1,8 @@
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
-import {User} from "../../../models/user";
+import {User} from "../../../models/Request";
+import {JwtService} from "../../../services/jwt.service";
 
 @Component({
   selector: 'login',
@@ -12,19 +13,20 @@ import {User} from "../../../models/user";
 })
 export class LoginComponent {
   user: User = new User();
+  error: string;
 
-  constructor(private router: Router, private auth: AuthService) {
+  constructor(private router: Router, private auth: AuthService, private jwtService: JwtService) {
   }
 
   onLogin(): void {
-    localStorage.clear();
     this.auth.login(this.user)
       .then((user) => {
-        localStorage.setItem('token', user.json().token);
+        this.jwtService.saveToken(user.json().token);
         this.router.navigateByUrl('/profile');
       })
       .catch((err) => {
         console.log(err);
+        this.error = 'Username or password was incorrect. Please try again.';
       });
   }
 }

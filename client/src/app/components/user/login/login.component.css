@@ -6,6 +6,19 @@
   font-size: 16px;
 }
 
+.text-red{
+  color: #F4828C;
+}
+
+.center{
+  margin: 0 auto;
+
+}
+
+.btn{
+  width: 115px;
+  margin: 0 125px;
+}
 /* Reset top and bottom margins from certain elements */
 .login-header,
 .login p {

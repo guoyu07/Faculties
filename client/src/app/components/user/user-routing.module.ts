@@ -9,9 +9,9 @@ import {LoginComponent} from './login/login.component';
 import {UserComponent} from './user/user.component';
 
 const routes: Routes = [
-  {path: 'user', component: UserListComponent},
+  {path: 'user', component: UserListComponent, canActivate: [EnsureAuthenticated]},
   // {path: 'user/create', component: UserCreateComponent},
-  {path: 'user/:id', component: UserComponent},
+  {path: 'user/:id', component: UserComponent, canActivate: [EnsureAuthenticated]},
   {
     path: 'login',
     component: LoginComponent,

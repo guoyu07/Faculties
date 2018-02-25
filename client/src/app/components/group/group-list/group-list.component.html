@@ -1,3 +1,53 @@
-<p>
-  group-list works!
-</p>
+<a routerLink="/" routerLinkActive="active">Main</a>
+<a routerLink="/user" routerLinkActive="active">Users</a>
+<a routerLink="/user/create" routerLinkActive="active">New User</a>
+
+
+<a routerLink="/" routerLinkActive="active">Main</a>
+<a routerLink="/user" routerLinkActive="active">Users</a>
+<a routerLink="/user/create" routerLinkActive="active">New User</a>
+
+<div class="container">
+  <table class="highlight centered">
+    <thead>
+    <tr>
+      <th>Information</th>
+      <th>Limit</th>
+      <th>Qualify</th>
+      <th>Issue date</th>
+      <th>Valid till</th>
+      <th>Subjects</th>
+      <th>Faculty id</th>
+      <th><button *ngIf="isAdmin" type="button" class="btn green">Create</button></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let group of groups">
+      <td>{{group.information}}</td>
+      <td>{{group.limit}}</td>
+      <td>{{group.qualify}}</td>
+      <td>{{group.issueDate }}</td>
+      <td>{{group.facultyId}}</td>
+      <td>{{group.subjectNames}}</td>
+      <td [ngClass]="{'selected': group.facultyId  != null}"><a routerLink="/faculty/{{group.facultyId }}">{{
+        group.facultyId }}</a>
+      </td>
+      <td>
+        <button type="button" class="btn green" (click)="getGroup(group)">group</button>
+      </td>
+
+      <td>
+        <button *ngIf="isAdmin" type="button" class="btn orange">Edit</button>
+      </td>
+
+      <td>
+        <button *ngIf="isAdmin" type="button" class="btn red" (click)="deleteGroup(group)">Delete</button>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

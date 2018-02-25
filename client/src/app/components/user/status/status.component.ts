@@ -1,5 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {AuthService} from "../../../services/auth.service";
+import {User} from "../../../models/User";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'status',
@@ -7,9 +9,10 @@ import {AuthService} from "../../../services/auth.service";
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
-  name: string;
+  user: User = new User;
+  error: {};
 
-  constructor(private auth: AuthService) {
+  constructor(private router: Router, private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -19,10 +22,10 @@ export class StatusComponent implements OnInit {
       this.auth.ensureAuthenticated(token)
         .then((user) => {
           console.log(user.json());
-          this.name = user.json().name;
+          this.user = user.json();
         })
         .catch((err) => {
-          console.log(err);
+          this.error = err;
         });
     }
   }

@@ -2,51 +2,38 @@
 <a routerLink="/user" routerLinkActive="active">Users</a>
 <a routerLink="/user/create" routerLinkActive="active">New User</a>
 
-
 <div class="container">
-  <section>
-    <h1>Users</h1>
-    <div class="tbl-header">
-      <table cellpadding="0" cellspacing="0" border="0">
-        <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Patronymic</th>
-          <th>Group id</th>
-          <th>Score</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        </thead>
-      </table>
-    </div>
-    <div class="tbl-content">
-      <table cellpadding="0" cellspacing="0" border="0">
-        <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{user.name}}</td>
-          <td>{{user.lastname}}</td>
-          <td>{{user.patronymic}}</td>
-          <td [ngClass]="{'selected': user.groupId != null}">{{user.groupId }}</td>
-          <td>{{user.score}}</td>
+  <table class="highlight centered">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Lastname</th>
+      <th>Patronymic</th>
+      <th>Group id</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
 
-          <td>
-            <button type="button" class="btn btn-success" (click)="getProfile(user)">Profile</button>
-          </td>
-          <td>
-            <button type="button" class="btn btn-success">Edit</button>
-          </td>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.name}}</td>
+      <td>{{user.lastname}}</td>
+      <td>{{user.patronymic}}</td>
+      <td [ngClass]="{'selected': user.groupId != null}"><a routerLink="/group/{{user.groupId }}">{{user.groupId }}</a>
+      </td>
+      <td>
+        <button type="button" class="btn green" (click)="getProfile(user)">Profile</button>
+      </td>
+      <td>
+        <button type="button" class="btn orange">Edit</button>
+      </td>
+      <td>
+        <button type="button" class="btn red" (click)="deleteUser(user)">Delete</button>
+      </td>
+    </tr>
 
-          <td>
-
-            <button type="button" class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
-          </td>
-
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    </tbody>
+  </table>
 </div>

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import {User} from '../models/dto/User';
+import {User} from '../models/User';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Group} from '../models/dto/Group';
+import {Group} from '../models/Group';
 
 
 @Injectable()
@@ -21,23 +21,23 @@ export class GroupService {
   }
 
   findAll(): Observable<Group[]> {
-    return this.http.get(this.apiUrl, {headers: this.headers});
+    return this.http.get(this.apiUrl);
   }
 
   findById(id: number): Observable<Group> {
-    return this.http.get(this.apiUrl + '/' + id, {headers: this.headers});
+    return this.http.get(this.apiUrl + '/' + id);
   }
 
-  saveUser(group: Group): Observable<Object> {
-    return this.http.post(this.apiUrl, group)
+  saveGroup(group: Group): Observable<Object> {
+    return this.http.post(this.apiUrl, group, {headers: this.headers})
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteUserById(id: number) {
+  deleteById(id: number) {
     return this.http.delete(this.apiUrl + '/' + id, {headers: this.headers});
   }
 
-  updateUser(group: Group): Observable<User> {
+  updateGroup(group: Group): Observable<void> {
     return null;
   }
 

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
-import {User} from '../../../models/dto/User';
+import {User} from '../../../models/User';
 import {Router} from '@angular/router';
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-user-list',
@@ -14,18 +15,28 @@ export class UserListComponent implements OnInit {
   public users: User[];
 
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private auth: AuthService) {
   }
 
   ngOnInit() {
-    this.getAllUsers();
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log(token);
+      this.auth.ensureAuthenticated(token)
+        .then((user) => {
+          this.getAllUsers();
+        })
+        .catch((err) => {
+          this.error = err;
+        });
+    }
   }
 
   getAllUsers() {
     this.userService.findAll().subscribe(
       users => {
         this.users = users;
-        console.log(this.users);
+        console.log(users);
       },
       err => {
         console.log(err);

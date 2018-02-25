@@ -9,14 +9,19 @@ import {EnsureAuthenticated} from './services/ensure-authenticated.service';
 import {LoginRedirect} from './services/login-redirect.service';
 import {UserModule} from './components/user/user.module';
 import {HttpClientModule} from '@angular/common/http';
-import {UserComponent} from './components/user/user/user.component';
-import { GroupComponent } from './components/group/group/group.component';
-import { GroupListComponent } from './components/group/group-list/group-list.component';
+
 import {GroupModule} from './components/group/group.module';
+
+import { FooterComponent } from './layout/footer/footer.component';
+import { HeaderComponent } from './layout/header/header.component';
+import {IndexModule} from "./index/index.module";
+import {JwtService} from "./services/jwt.service";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -24,12 +29,14 @@ import {GroupModule} from './components/group/group.module';
     FormsModule,
     UserModule,
     RouterModule,
-    GroupModule
+    GroupModule,
+    IndexModule
   ],
   providers: [
     EnsureAuthenticated,
     LoginRedirect,
     HttpClientModule,
+    JwtService
   ],
   bootstrap: [AppComponent]
 })

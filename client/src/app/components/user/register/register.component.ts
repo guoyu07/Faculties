@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { User } from '../../../models/user';
+import { User } from '../../../models/Request';
 
 @Component({
   selector: 'register',

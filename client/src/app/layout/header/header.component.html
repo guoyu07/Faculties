@@ -1,0 +1,28 @@
+<nav class="light-blue lighten-1 " role="navigation">
+
+  <div class="container">
+    <div class="nav-wrapper container"><a id="logo-container" routerLink="/" routerLinkActive="active"
+                                          class="brand-logo">Faculties</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a *ngIf="!getToken()" routerLink="/login" routerLinkActive="active" href="#">Sign in</a></li>
+        <li><a *ngIf="!getToken()" routerLink="/register" routerLinkActive="active" href="#">Sign up</a>
+        </li>
+        <li><a *ngIf="getToken()" (click)="logout()" routerLink="/">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+<div class="container">
+  <div class="nav-content green">
+    <ul class="tabs tabs-transparent">
+      <li class="tab"><a *ngIf="getToken()" routerLink="/profile">Profile</a>
+      </li>
+      <li class="tab"><a *ngIf="isAdmin" routerLink="/user">Users</a></li>
+      <li class="tab"><a routerLink="/group">groups</a>
+
+      </li>
+    </ul>
+  </div>
+</div>
