@@ -83,34 +83,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//     http.httpBasic().and().cors().and().csrf().disable();
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//                .authorizeRequests()
-//                //GROUPS
-//                .antMatchers(HttpMethod.GET, "/groups").permitAll()
-//                .antMatchers(HttpMethod.POST, "/groups/**").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.PUT, "/groups/**").hasAuthority("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/groups/**").hasAuthority("ADMIN")
-//                //REQUESTS
-//                .antMatchers("/requests", "/roles").hasAuthority("ADMIN")
-//                //SUBJECTS
-//                .antMatchers("/subjects/change_state/").hasAuthority("USER")
-//                .antMatchers("/subjects").hasAuthority("ADMIN")
-//                //GUEST
-//                .antMatchers("/guest").permitAll()
-//                //USERS
-//                .antMatchers("/users/**").authenticated()
-//                // .antMatchers("/users/**").hasAuthority("USER")
-//                //STATISTIC
-//                .antMatchers("/statistic/**").authenticated().and()
-//                .addFilterAfter(new JwtAuthenticationFilter(authenticationManagerBean()),
-//                        BasicAuthenticationFilter.class)
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new RestAuthenticationEntryPoint())
-//                .accessDeniedHandler(new RestAccessDeniedHandler());
-//        //.antMatchers("/swagger-ui.html").permitAll();
-
         http.csrf().disable().
 
         sessionManagement()
@@ -131,16 +103,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring()
-<<<<<<< HEAD
                 .antMatchers(HttpMethod.POST, AUTH_POST_RESPONSE_WHITELIST)
                 .antMatchers(AUTH_SWAGGER_WHITELIST)
                 .antMatchers(HttpMethod.GET, AUTH_GET_RESPONSE_WHITELIST)
-=======
-                .antMatchers(HttpMethod.POST, allowedUrlsForPost)
-                .antMatchers(AUTH_WHITELIST)
-                .antMatchers(HttpMethod.GET,"/groups/**")
-                .antMatchers(HttpMethod.GET, "/groups/{\\d+}")
->>>>>>> 12449e3342ac88a8b3fc13cac2a1b71d0a37254d
                 .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
