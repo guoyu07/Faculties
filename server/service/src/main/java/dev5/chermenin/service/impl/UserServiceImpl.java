@@ -15,6 +15,7 @@ import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
 import dev5.chermenin.service.util.converters.Converter;
 import dev5.chermenin.service.util.converters.impl.ProfileUserConverter;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,24 +32,15 @@ import java.util.Set;
  */
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    private UserRepository userRepository;
-    private GroupRepository groupRepository;
-    private GroupService groupService;
-    private UserInformationRepository userInformationRepository;
-    private Converter<UserDto, User> userConverter;
-    private ProfileUserConverter profileUserConverter;
-    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository, Converter<UserDto, User> userConverter, GroupRepository groupRepository, GroupService groupService, UserInformationRepository userInformationRepository, ProfileUserConverter profileUserConverter) {
-        this.userRepository = userRepository;
-        this.userConverter = userConverter;
-        this.groupRepository = groupRepository;
-        this.userInformationRepository = userInformationRepository;
-        this.groupService = groupService;
-        this.profileUserConverter = profileUserConverter;
-    }
+    private final UserRepository userRepository;
+    private final GroupRepository groupRepository;
+    private final GroupService groupService;
+    private final UserInformationRepository userInformationRepository;
+    private final Converter<UserDto, User> userConverter;
+    private final ProfileUserConverter profileUserConverter;
+    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Transactional
     @Override

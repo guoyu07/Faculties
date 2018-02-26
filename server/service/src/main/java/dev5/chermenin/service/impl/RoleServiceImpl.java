@@ -5,6 +5,7 @@ import dev5.chermenin.model.entity.impl.User;
 import dev5.chermenin.model.entity.impl.enums.Roles;
 import dev5.chermenin.service.api.RoleService;
 import dev5.chermenin.service.exceptions.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
-    private UserRepository userRepository;
-    private Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
-
-    @Autowired
-    public RoleServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
+    private final Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
 
     @Transactional
     public void addRoleToUser(long userId, Roles role) {

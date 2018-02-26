@@ -4,6 +4,7 @@ import dev5.chermenin.dao.repository.UserRepository;
 import dev5.chermenin.model.entity.impl.User;
 import dev5.chermenin.service.dto.impl.user.ProfileUserDto;
 import dev5.chermenin.service.util.converters.AbstractConverter;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,15 +13,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component(value = "profileUserConverter")
+@RequiredArgsConstructor
 public class ProfileUserConverter extends AbstractConverter<ProfileUserDto, User> {
-    private ModelMapper modelMapper;
-    private UserRepository userRepository;
+    private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
 
-    @Autowired
-    public ProfileUserConverter(ModelMapper modelMapper, UserRepository userRepository) {
-        this.modelMapper = modelMapper;
-        this.userRepository = userRepository;
-    }
 
     public ProfileUserDto convertToDto(User user) {
         ProfileUserDto dto = this.modelMapper.map(user, ProfileUserDto.class);

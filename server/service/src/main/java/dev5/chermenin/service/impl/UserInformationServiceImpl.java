@@ -8,6 +8,7 @@ import dev5.chermenin.service.exceptions.ConflictException;
 import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
 import dev5.chermenin.service.util.converters.Converter;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,11 @@ import java.util.Objects;
  * Created by Ancarian on 10.10.2017.
  */
 @Service
+@RequiredArgsConstructor
 public class UserInformationServiceImpl implements UserInformationService {
-    private UserInformationRepository userInformationRepository;
-    private Converter<UserInformationDto, UserInformation> userInformationConverter;
-    private Logger logger = LoggerFactory.getLogger(UserInformationServiceImpl.class);
-
-    @Autowired
-    public UserInformationServiceImpl(UserInformationRepository userInformationRepository, Converter<UserInformationDto, UserInformation> userInformationConverter) {
-        this.userInformationRepository = userInformationRepository;
-        this.userInformationConverter = userInformationConverter;
-    }
+    private final UserInformationRepository userInformationRepository;
+    private final Converter<UserInformationDto, UserInformation> userInformationConverter;
+    private final Logger logger = LoggerFactory.getLogger(UserInformationServiceImpl.class);
 
     @Override
     public UserInformationDto findById(Long id) {

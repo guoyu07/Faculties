@@ -9,6 +9,7 @@ import dev5.chermenin.service.dto.subject.SubjectDto;
 import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
 import dev5.chermenin.service.util.converters.Converter;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,14 @@ import java.util.List;
  * Created by Ancarian on 01.12.2017.
  */
 @Service
+@RequiredArgsConstructor
 public class SubjectServiceImpl implements SubjectService {
 
-    private SubjectRepository subjectRepository;
-    private UserRepository userRepository;
-    private Converter<SubjectDto, Subject> subjectConverter;
-    private Logger logger = LoggerFactory.getLogger(SubjectServiceImpl.class);
+    private final SubjectRepository subjectRepository;
+    private final UserRepository userRepository;
+    private final Converter<SubjectDto, Subject> subjectConverter;
+    private final Logger logger = LoggerFactory.getLogger(SubjectServiceImpl.class);
 
-    @Autowired
-    public SubjectServiceImpl(SubjectRepository subjectRepository, UserRepository userRepository, Converter<SubjectDto, Subject> subjectConverter) {
-        this.subjectRepository = subjectRepository;
-        this.subjectConverter = subjectConverter;
-        this.userRepository = userRepository;
-    }
 
     @Override
     public SubjectDto findByName(String name) {

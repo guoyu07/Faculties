@@ -7,7 +7,7 @@ import dev5.chermenin.service.api.FacultyService;
 import dev5.chermenin.service.dto.impl.FacultyDto;
 import dev5.chermenin.service.exceptions.NotFoundException;
 import dev5.chermenin.service.util.converters.Converter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,18 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FacultyServiceImpl implements FacultyService {
 
-    private Converter<FacultyDto, Faculty> facultyConverter;
-    private FacultyRepository facultyRepository;
-    private UniversityRepository universityRepository;
-
-    @Autowired
-    public FacultyServiceImpl(Converter<FacultyDto, Faculty> facultyConverter, FacultyRepository facultyRepository, UniversityRepository universityRepository) {
-        this.facultyConverter = facultyConverter;
-        this.facultyRepository = facultyRepository;
-        this.universityRepository = universityRepository;
-    }
+    private final Converter<FacultyDto, Faculty> facultyConverter;
+    private final FacultyRepository facultyRepository;
+    private final UniversityRepository universityRepository;
 
     @Transactional(readOnly = true)
     @Override

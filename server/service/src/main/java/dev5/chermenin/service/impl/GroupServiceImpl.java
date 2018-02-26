@@ -10,6 +10,7 @@ import dev5.chermenin.service.dto.impl.GroupDto;
 import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
 import dev5.chermenin.service.util.converters.Converter;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +23,15 @@ import java.util.HashSet;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
-    private UserRepository userRepository;
-    private GroupRepository groupRepository;
-    private FacultyRepository facultyRepository;
-    private Converter<GroupDto, Group> groupConverter;
-    private Logger logger = LoggerFactory.getLogger(GroupServiceImpl.class);
+    private final UserRepository userRepository;
+    private final GroupRepository groupRepository;
+    private final FacultyRepository facultyRepository;
+    private final Converter<GroupDto, Group> groupConverter;
+    private final Logger logger = LoggerFactory.getLogger(GroupServiceImpl.class);
 
-    @Autowired
-    public GroupServiceImpl(UserRepository userRepository, GroupRepository groupRepository, FacultyRepository facultyRepository, Converter<GroupDto, Group> groupConverter) {
-        this.userRepository = userRepository;
-        this.groupRepository = groupRepository;
-        this.facultyRepository = facultyRepository;
-        this.groupConverter = groupConverter;
-    }
+
 
     @Transactional
     public GroupDto findById(Long id) {
