@@ -1,7 +1,6 @@
 package dev5.chermenin.model.entity.impl;
 
-import dev5.chermenin.model.entity.BaseObj;
-import lombok.EqualsAndHashCode;
+import dev5.chermenin.model.entity.BaseObject;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -10,11 +9,11 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.util.Map;
 
-@Entity
-@Table(name = "users")
 @Getter
 @Setter
-public class User extends BaseObj {
+@Entity
+@Table(name = "users")
+public class User extends BaseObject {
 
     @Column(name = "name", nullable = false)
     private String name;

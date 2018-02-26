@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class BaseObj implements Serializable {
+public class BaseObject implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

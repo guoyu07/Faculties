@@ -1,10 +1,8 @@
 package dev5.chermenin.model.entity.impl;
 
-import dev5.chermenin.model.entity.BaseObj;
+import dev5.chermenin.model.entity.BaseObject;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -15,7 +13,7 @@ import java.util.Set;
 @Table(name = "groups")
 @Getter
 @Setter
-public class Group extends BaseObj {
+public class Group extends BaseObject {
 
     @Column(name = "count_of_users")
     private int countOfUsers;

@@ -1,19 +1,17 @@
 package dev5.chermenin.model.entity.impl;
 
-import dev5.chermenin.model.entity.BaseObj;
-import lombok.EqualsAndHashCode;
+import dev5.chermenin.model.entity.BaseObject;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
-@Entity
-@Table(name = "faculties")
 @Getter
 @Setter
-public class Faculty extends BaseObj {
+@Entity
+@Table(name = "faculties")
+public class Faculty extends BaseObject {
 
     @Column(name = "name", unique = true, nullable = false)
     private String name;

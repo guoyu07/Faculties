@@ -1,19 +1,18 @@
 package dev5.chermenin.model.entity.impl;
 
-import dev5.chermenin.model.entity.BaseObj;
-import lombok.EqualsAndHashCode;
+import dev5.chermenin.model.entity.BaseObject;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
-@Table(name = "universities")
+
 @Getter
 @Setter
-@EqualsAndHashCode
-public class University extends BaseObj {
+@Entity
+@Table(name = "universities")
+public class University extends BaseObject {
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(name = "moderators", joinColumns = {@JoinColumn(name = "faculties_id")},

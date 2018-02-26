@@ -1,8 +1,7 @@
 package dev5.chermenin.model.entity.impl;
 
-import dev5.chermenin.model.entity.BaseObj;
+import dev5.chermenin.model.entity.BaseObject;
 import dev5.chermenin.model.entity.impl.enums.Roles;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +9,11 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
-@Entity
-@Table(name = "user_information")
 @Getter
 @Setter
-@EqualsAndHashCode
-public class UserInformation extends BaseObj {
+@Entity
+@Table(name = "user_information")
+public class UserInformation extends BaseObject {
 
     @Column(name = "date_of_registration")
     private Date dateOfRegistration;
