@@ -127,7 +127,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, allowedUrlsForPost)
                 .antMatchers(AUTH_WHITELIST)
                 .antMatchers(HttpMethod.GET,"/groups/**")
-                .antMatchers(HttpMethod.GET, "/groups/{\\d+}");
+                .antMatchers(HttpMethod.GET, "/groups/{\\d+}")
+                .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
 }
