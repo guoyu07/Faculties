@@ -5,7 +5,7 @@ import dev5.chermenin.dao.repository.UserRepository;
 import dev5.chermenin.model.entity.impl.Subject;
 import dev5.chermenin.model.entity.impl.User;
 import dev5.chermenin.service.api.SubjectService;
-import dev5.chermenin.service.dto.impl.SubjectDto;
+import dev5.chermenin.service.dto.subject.SubjectDto;
 import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
 import dev5.chermenin.service.util.converters.Converter;

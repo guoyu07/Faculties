@@ -1,9 +1,10 @@
 package dev5.chermenin.model.entity.impl;
 
 import dev5.chermenin.model.entity.BaseObj;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Date;

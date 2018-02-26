@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @ApiOperation(value = "add request", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "add request")
     @RequestMapping(value = "/{userId}/{groupId}", method = RequestMethod.PUT, name = "")
     public ResponseEntity<UserDto> addRequest(@PathVariable(value = "userId") long userId, @PathVariable(value = "groupId") long groupId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @ApiOperation(value = "find user by Id", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "find user by Id")
     @RequestMapping(value = "/id/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserDto> findById(@PathVariable(value = "userId") long userId) {
         UserDto userDto = userService.findById(userId);
@@ -60,7 +60,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @ApiOperation(value = "find user by name", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "find user by name")
     @RequestMapping(value = "/name/{userName}", method = RequestMethod.GET)
     public ResponseEntity<UserDto> findByName(@PathVariable(value = "userName") String userName) {
         return new ResponseEntity<>(userService.findById(userInformationService.findByNickname(userName).getId()), HttpStatus.OK);
@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @ApiOperation(value = "remove user", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "remove user")
     @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
     public ResponseEntity removeUser(@PathVariable(value = "userId") long id) {
         userService.remove(id);
@@ -82,7 +82,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @ApiOperation(value = "update user", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "update user")
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity updateUser(@Valid @RequestBody ProfileUserDto userDto) {
         userService.update(userDto);
@@ -90,7 +90,7 @@ public class UserController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @ApiOperation(value = "get profile user", authorizations = {@Authorization(value = "basicAuth")})
+    @ApiOperation(value = "get profile user")
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     public ResponseEntity<ProfileUserDto> getProfile() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

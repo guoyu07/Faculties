@@ -21,7 +21,7 @@ public class Faculty extends BaseObj {
     @Column(name = "information", unique = true, nullable = false)
     private String information;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "faculty", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "faculty", fetch = FetchType.LAZY)
     private List<Group> groups;
 
     @ManyToOne(fetch = FetchType.LAZY)

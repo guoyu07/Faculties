@@ -27,5 +27,6 @@ public class ProfileUserDto extends Dto {
 
     private Map<String, Integer> marks;
 
+
 }
 

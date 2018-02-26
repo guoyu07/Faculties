@@ -14,7 +14,7 @@ export class AuthService {
 
   login(user: Object): Promise<any> {
     let url: string = `${this.BASE_URL}/login`;
-    return this.http.post(url, user, {headers: this.headers}).toPromise();
+    return this.http.post(url, user, {headers: this.headers}).toPromise()
   }
 
   logout() {

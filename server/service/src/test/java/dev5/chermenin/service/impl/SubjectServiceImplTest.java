@@ -4,7 +4,7 @@ import dev5.chermenin.dao.repository.SubjectRepository;
 import dev5.chermenin.dao.repository.UserRepository;
 import dev5.chermenin.service.TestDataBaseConfig;
 import dev5.chermenin.service.api.SubjectService;
-import dev5.chermenin.service.dto.impl.SubjectDto;
+import dev5.chermenin.service.dto.subject.SubjectDto;
 import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
 import org.junit.Test;

@@ -127,6 +127,13 @@ public class UserServiceImplTest {
         userService.update(profileUserDto);
     }
 
+    @Ignore
+    @Test
+    public void remove() {
+        userService.remove(1L);
+        System.out.println(groupService.findAll(pageable).size());
+    }
+
     @Test(expected = NotFoundException.class)
     public void removeNotExistUser() {
         userService.remove(100);
@@ -149,20 +156,6 @@ public class UserServiceImplTest {
         this.profileUserDto.getInfo().setEmail("email_" + 17);
         this.profileUserDto.setId(null);
         userService.save(profileUserDto);
-    }
-
-    @Ignore
-    @Test
-    public void getTopUsers() throws Exception {
-//        List<UserDto> users = userService.getVerifiedUsersInGroup(groupService.findAll(pageable).get(0).getId());
-//        for (int i = 0; i < 5; i++) {
-//            assertEquals((Integer) ((6 - i) * 10 * 3), users.get(i).ge());
-//        }
-//
-//        users = userService.getVerifiedUsersInGroup(groupService.findAll(pageable).get(1).getId());
-//        for (int i = 0; i < 6; i++) {
-//            assertEquals((Integer) ((12 - i) * 10 * 3), users.get(i).getMark());
-//        }
     }
 
     @Test
@@ -215,4 +208,6 @@ public class UserServiceImplTest {
     public void selectNotFoundGroup() throws Exception {
         userService.selectGroup(15, 100);
     }
+
+
 }

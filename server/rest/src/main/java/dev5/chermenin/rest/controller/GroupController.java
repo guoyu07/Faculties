@@ -1,9 +1,6 @@
 package dev5.chermenin.rest.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import dev5.chermenin.service.api.GroupService;
-import dev5.chermenin.service.dto.View;
 import dev5.chermenin.service.dto.impl.GroupDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +29,6 @@ public class GroupController {
         this.groupService = groupService;
     }
 
-    @JsonView(View.Enable.class)
     @ApiOperation(value = "get all groups")
     @RequestMapping(value = "/groups", method = RequestMethod.GET)
     public ResponseEntity<List<GroupDto>> allGroups(Pageable pageable) {
@@ -47,12 +43,14 @@ public class GroupController {
         return new ResponseEntity<>(groupDto, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "save new group")
     @RequestMapping(value = "/groups", method = RequestMethod.POST)
     public ResponseEntity<GroupDto> addGroup(@Valid @RequestBody GroupDto groupDto) {
         return new ResponseEntity<>(groupService.save(groupDto), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "remove group")
     @RequestMapping(value = "/groups/{groupId}", method = RequestMethod.DELETE)
     public ResponseEntity removeGroup(@PathVariable(value = "groupId") long id) {
@@ -60,14 +58,12 @@ public class GroupController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @JsonView(View.Enable.class)
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "update group")
     @RequestMapping(value = "/groups/", method = RequestMethod.PUT)
     public ResponseEntity updateGroup(@Valid @RequestBody GroupDto groupDto) {
         groupService.update(groupDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 }

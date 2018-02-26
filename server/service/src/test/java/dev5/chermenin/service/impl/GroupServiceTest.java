@@ -2,9 +2,11 @@ package dev5.chermenin.service.impl;
 
 import dev5.chermenin.service.TestDataBaseConfig;
 import dev5.chermenin.service.api.GroupService;
+import dev5.chermenin.service.api.UserService;
 import dev5.chermenin.service.dto.impl.GroupDto;
 import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,8 @@ public class GroupServiceTest{
     private final static Pageable pageable = new PageRequest(0,100);
     @Autowired
     private GroupService groupService;
+    @Autowired
+    private UserService userService;
 
     @Test
     public void findById() {
@@ -53,7 +57,7 @@ public class GroupServiceTest{
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void SaveNullGroup() {
+    public void saveNullGroup() {
         groupService.save(null);
     }
 
@@ -101,6 +105,12 @@ public class GroupServiceTest{
     @Test(expected = NotFoundException.class)
     public void removeNotExistsGroup() {
         groupService.remove(1000L);
+    }
+
+    @Ignore
+    @Test
+    public void removeGroup() {
+        groupService.remove(1L);
     }
 
     @Test

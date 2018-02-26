@@ -3,6 +3,7 @@ package dev5.chermenin.service.impl;
 import dev5.chermenin.service.TestDataBaseConfig;
 import dev5.chermenin.service.api.FacultyService;
 import dev5.chermenin.service.dto.impl.FacultyDto;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,12 @@ public class FacultyServiceImplTest {
         facultyDto.setUniversityId(1L);
         facultyDto.setName("name22");
         facultyDto.setInformation("info22");
-
         facultyService.save(facultyDto);
+    }
 
+    @Ignore
+    @Test
+    public void remove() {
+        facultyService.remove(1L);
     }
 }

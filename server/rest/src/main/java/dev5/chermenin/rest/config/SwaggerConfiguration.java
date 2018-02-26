@@ -31,11 +31,6 @@ public class SwaggerConfiguration {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("REST API")
-                .description("The REST API for demo swagger.").termsOfServiceUrl("")
-                .contact(new Contact("RICH LEE", "", "rich.lee@gmail.com"))
-                .license("Apache License Version 2.0")
-                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-                .version("0.0.1")
                 .build();
     }
 

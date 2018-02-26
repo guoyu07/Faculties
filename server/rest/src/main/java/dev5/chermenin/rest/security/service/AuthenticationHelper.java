@@ -3,8 +3,10 @@ package dev5.chermenin.rest.security.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev5.chermenin.rest.security.exception.InvalidTokenAuthenticationException;
+import dev5.chermenin.rest.security.model.JwtUserDetails;
 import dev5.chermenin.rest.security.model.TokenPayload;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
@@ -12,7 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by Ancarian on 18.02.2018.
@@ -43,6 +47,28 @@ public class AuthenticationHelper {
             throw new InternalAuthenticationServiceException("Error generating token.", exception);
         }
     }
+
+    public String generateToken(final JwtUserDetails userDetails) {
+        Set<String> roles = new HashSet<>();
+
+        for (GrantedAuthority role: userDetails.getAuthorities()) {
+            roles.add(role.getAuthority())   ;
+        }
+
+        try {
+            TokenPayload payload = new TokenPayload(
+                    userDetails.getId(),
+                    Instant.now().getEpochSecond() + this.tokenExpirationTime,roles
+            );
+
+            String token = this.objectMapper.writeValueAsString(payload);
+            return JwtHelper.encode(token, new MacSigner(SECRET)).getEncoded();
+        } catch (JsonProcessingException exception) {
+            throw new InternalAuthenticationServiceException("Error generating token.", exception);
+        }
+    }
+
+
 
     public TokenPayload decodeToken(final String token) {
         if (Objects.isNull(token)) {

@@ -15,7 +15,6 @@ import java.util.Set;
  */
 
 public class JwtUserDetails implements UserDetails {
-
     private Long id;
     private String username;
     private String password;
@@ -28,11 +27,8 @@ public class JwtUserDetails implements UserDetails {
         this.authorities = new HashSet<>();
 
         for (Roles role : userInformation.getRoles()) {
-
             this.authorities.add(new SimpleGrantedAuthority(role.toString()));
         }
-
-
     }
 
     public Long getId() {

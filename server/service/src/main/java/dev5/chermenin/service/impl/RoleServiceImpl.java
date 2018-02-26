@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 @Service
 public class RoleServiceImpl implements RoleService {
     private UserRepository userRepository;
@@ -39,6 +41,16 @@ public class RoleServiceImpl implements RoleService {
         }
         User user = this.userRepository.findOne(userId);
         user.getInfo().getRoles().remove(role);
+    }
+
+    @Transactional
+    @Override
+    public Set<Roles> getRolesByUserId(Long userId) {
+        if (!this.userRepository.exists(userId)) {
+            this.logger.error("user with id: {} not found", userId);
+            throw new NotFoundException(String.format("user with id: %d not found", userId));
+        }
+        return userRepository.findOne(userId).getInfo().getRoles();
     }
 }
 

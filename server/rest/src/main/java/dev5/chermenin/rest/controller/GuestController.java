@@ -34,8 +34,4 @@ public class GuestController {
         return new ResponseEntity<>(userService.save(userDto), HttpStatus.CREATED);
     }
 
-    @RequestMapping("/login")
-    public Principal user(Principal principal) {
-        return principal;
-    }
 }

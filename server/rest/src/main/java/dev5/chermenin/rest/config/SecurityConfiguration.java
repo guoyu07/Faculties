@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**",
             "/swagger-ui.html",
             "/v2/api-docs",
-            "/webjars/**"
+            "/webjars/**",
     };
 
     private final UserDetailsService userDetailsService;
@@ -126,7 +126,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers(HttpMethod.POST, allowedUrlsForPost)
                 .antMatchers(AUTH_WHITELIST)
-                .antMatchers(HttpMethod.OPTIONS, "/**");
+                .antMatchers(HttpMethod.GET,"/groups/**")
+                .antMatchers(HttpMethod.GET, "/groups/{\\d+}");
     }
 
 }

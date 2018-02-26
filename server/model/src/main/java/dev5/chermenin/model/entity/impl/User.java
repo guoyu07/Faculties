@@ -4,6 +4,8 @@ import dev5.chermenin.model.entity.BaseObj;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Map;
@@ -12,7 +14,6 @@ import java.util.Map;
 @Table(name = "users")
 @Getter
 @Setter
-@EqualsAndHashCode
 public class User extends BaseObj {
 
     @Column(name = "name", nullable = false)
@@ -30,6 +31,7 @@ public class User extends BaseObj {
 
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserInformation info;
 
     @ElementCollection(fetch = FetchType.LAZY)

@@ -2,6 +2,7 @@ package dev5.chermenin.rest.security.service;
 
 import dev5.chermenin.dao.repository.UserInformationRepository;
 import dev5.chermenin.rest.security.SecurityHelper;
+import dev5.chermenin.rest.security.model.JwtAuthenticationToken;
 import dev5.chermenin.rest.security.model.JwtUserDetails;
 import dev5.chermenin.service.api.UserService;
 import dev5.chermenin.service.dto.impl.login.LoginRequestDto;
@@ -54,8 +55,9 @@ public class AuthenticationServiceImpl {
                 if (Objects.isNull(user)) {
                     throw new RuntimeException("User not exist in system.");
                 }
+                JwtAuthenticationToken tokenn = new JwtAuthenticationToken(userDetails);
 
-                String token = this.authenticationHelper.generateToken(userDetails.getId());
+                String token = this.authenticationHelper.generateToken(userDetails);
 
                 return new LoginResponseDto(token);
             } else {

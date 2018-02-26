@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 /**
  * Created by Ancarian on 24.12.2017.
  */
 
 @RestController
-@RequestMapping("roles")
-@Api(description = "Role controller", authorizations = {@Authorization(value = "basicAuth")})
+@RequestMapping("/roles")
+@Api(description = "Role controller")
 public class RoleController {
 
     private RoleService roleService;
@@ -41,6 +43,12 @@ public class RoleController {
     public ResponseEntity removeUserRole(@PathVariable(value = "user_id") long user_id, @PathVariable(value = "user_role") String user_role) {
         roleService.removeUserRole(user_id, Roles.valueOf(user_role));
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "get roles by user")
+    @RequestMapping(value = "/{user_id}", method = RequestMethod.PUT)
+    public ResponseEntity<Set<Roles>> addRoleToUser(@PathVariable(value = "user_id") long user_id) {
+        return new ResponseEntity<>(roleService.getRolesByUserId(user_id), HttpStatus.OK);
     }
 
 }
