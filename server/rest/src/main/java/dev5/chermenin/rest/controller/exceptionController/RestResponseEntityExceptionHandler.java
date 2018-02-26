@@ -23,32 +23,22 @@ public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {NotFoundException.class})
     protected ResponseEntity<Object> handleNotFound(RuntimeException ex, WebRequest request) {
-
         HttpHeaders headers = new HttpHeaders();
-        ExceptionDto exceptionDto = new ExceptionDto();
-        exceptionDto.setMessage(ex.getMessage());
-        exceptionDto.setMethodName(ex.getStackTrace()[0].getMethodName());
-
+        ExceptionDto exceptionDto = new ExceptionDto(ex);
         return new ResponseEntity<>(exceptionDto, headers, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = {ExistsException.class})
     protected ResponseEntity<Object> handleExists(RuntimeException ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
-        ExceptionDto exceptionDto = new ExceptionDto();
-        exceptionDto.setMessage(ex.getMessage());
-        exceptionDto.setMethodName(ex.getStackTrace()[0].getMethodName());
-
+        ExceptionDto exceptionDto = new ExceptionDto(ex);
         return new ResponseEntity<>(exceptionDto, headers, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(value = {IllegalArgumentException.class})
     protected ResponseEntity<Object> handleIllegalArgument(RuntimeException ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
-        ExceptionDto exceptionDto = new ExceptionDto();
-        exceptionDto.setMessage(ex.getMessage());
-        exceptionDto.setMethodName(ex.getStackTrace()[0].getMethodName());
-
+        ExceptionDto exceptionDto = new ExceptionDto(ex);
         return new ResponseEntity<>(exceptionDto, headers, HttpStatus.BAD_REQUEST);
     }
 
@@ -56,6 +46,11 @@ public class RestResponseEntityExceptionHandler {
         private Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         private String methodName;
         private String message;
+
+        public ExceptionDto(Exception ex) {
+            this.methodName  = ex.getMessage();
+            this.message = ex.getStackTrace()[0].getMethodName();
+        }
 
         public Timestamp getTimestamp() {
             return timestamp;
