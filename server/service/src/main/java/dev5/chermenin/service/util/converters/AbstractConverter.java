@@ -1,6 +1,6 @@
 package dev5.chermenin.service.util.converters;
 
-import dev5.chermenin.model.entity.BaseObj;
+import dev5.chermenin.model.entity.BaseObject;
 import dev5.chermenin.service.dto.Dto;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Ancarian on 24.12.2017.
  */
-public abstract class AbstractConverter<T extends Dto, K extends BaseObj> implements Converter<T, K> {
+public abstract class AbstractConverter<T extends Dto, K extends BaseObject> implements Converter<T, K> {
 
     @Override
     public List<K> convertToEntity(List<T> dtoList) {
