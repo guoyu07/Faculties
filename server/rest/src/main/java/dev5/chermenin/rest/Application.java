@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -42,6 +43,11 @@ public class Application extends WebMvcConfigurerAdapter {
         modelMapper.createTypeMap(Group.class, GroupDto.class).setConverter(new GroupDtoConverter(modelMapper).converter());
         modelMapper.createTypeMap(User.class, UserScoreDto.class).setConverter(new UserScoreDtoConverter().converter());
         return modelMapper;
+    }
+
+    @Bean
+    public PropertySourcesPlaceholderConfigurer configurer() {
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     @Bean

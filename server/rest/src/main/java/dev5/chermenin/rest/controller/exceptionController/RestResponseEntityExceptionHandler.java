@@ -16,14 +16,15 @@ import java.sql.Timestamp;
 /**
  * Created by Ancarian on 21.12.2017.
  */
+
 @RestControllerAdvice
 @ResponseBody
 public class RestResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {NotFoundException.class})
     protected ResponseEntity<Object> handleNotFound(RuntimeException ex, WebRequest request) {
-        HttpHeaders headers = new HttpHeaders();
 
+        HttpHeaders headers = new HttpHeaders();
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage(ex.getMessage());
         exceptionDto.setMethodName(ex.getStackTrace()[0].getMethodName());
@@ -34,7 +35,6 @@ public class RestResponseEntityExceptionHandler {
     @ExceptionHandler(value = {ExistsException.class})
     protected ResponseEntity<Object> handleExists(RuntimeException ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
-
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage(ex.getMessage());
         exceptionDto.setMethodName(ex.getStackTrace()[0].getMethodName());
@@ -45,7 +45,6 @@ public class RestResponseEntityExceptionHandler {
     @ExceptionHandler(value = {IllegalArgumentException.class})
     protected ResponseEntity<Object> handleIllegalArgument(RuntimeException ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
-
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage(ex.getMessage());
         exceptionDto.setMethodName(ex.getStackTrace()[0].getMethodName());

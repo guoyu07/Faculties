@@ -1,17 +1,15 @@
 package dev5.chermenin.rest.controller;
 
 import dev5.chermenin.model.entity.impl.enums.Roles;
+import dev5.chermenin.rest.security.service.AuthenticationServiceImpl;
 import dev5.chermenin.service.api.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
@@ -19,18 +17,17 @@ import java.util.Set;
  * Created by Ancarian on 24.12.2017.
  */
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/roles")
 @Api(description = "Role controller")
+@RequiredArgsConstructor
 public class RoleController {
 
-    private RoleService roleService;
+    private final RoleService roleService;
+    private final AuthenticationServiceImpl authenticationService;
 
-    @Autowired
-    public RoleController(RoleService roleService) {
-        this.roleService = roleService;
-    }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "add role to user")
     @RequestMapping(value = "/{user_id}/{user_role}", method = RequestMethod.PUT)
     public ResponseEntity addRoleToUser(@PathVariable(value = "user_id") long user_id, @PathVariable(value = "user_role") String user_role) {
@@ -38,6 +35,7 @@ public class RoleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "remove user role")
     @RequestMapping(value = "/{user_id}/{user_role}", method = RequestMethod.DELETE)
     public ResponseEntity removeUserRole(@PathVariable(value = "user_id") long user_id, @PathVariable(value = "user_role") String user_role) {
@@ -45,10 +43,10 @@ public class RoleController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "get roles by user")
-    @RequestMapping(value = "/{user_id}", method = RequestMethod.PUT)
-    public ResponseEntity<Set<Roles>> addRoleToUser(@PathVariable(value = "user_id") long user_id) {
-        return new ResponseEntity<>(roleService.getRolesByUserId(user_id), HttpStatus.OK);
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public ResponseEntity<Set<Roles>> getRolesByUser() {
+        return new ResponseEntity<>(roleService.getRolesByUserId(authenticationService.getMyId()), HttpStatus.OK);
     }
-
 }

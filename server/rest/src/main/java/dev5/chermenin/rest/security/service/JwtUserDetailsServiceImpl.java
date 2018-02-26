@@ -3,7 +3,7 @@ package dev5.chermenin.rest.security.service;
 import dev5.chermenin.dao.repository.UserInformationRepository;
 import dev5.chermenin.model.entity.impl.UserInformation;
 import dev5.chermenin.rest.security.model.JwtUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,14 +16,9 @@ import java.util.Optional;
  * Created by Ancarian on 18.02.2018.
  */
 @Service
+@RequiredArgsConstructor
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
-
     private final UserInformationRepository userInformationRepository;
-
-    @Autowired
-    public JwtUserDetailsServiceImpl(UserInformationRepository userInformationRepository) {
-        this.userInformationRepository = userInformationRepository;
-    }
 
     @Transactional
     @Override

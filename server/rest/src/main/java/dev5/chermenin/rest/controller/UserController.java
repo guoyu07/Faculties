@@ -1,19 +1,17 @@
 package dev5.chermenin.rest.controller;
 
+import dev5.chermenin.rest.security.service.AuthenticationServiceImpl;
 import dev5.chermenin.service.api.UserInformationService;
 import dev5.chermenin.service.api.UserService;
 import dev5.chermenin.service.dto.impl.user.ProfileUserDto;
 import dev5.chermenin.service.dto.impl.user.UserDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,32 +21,24 @@ import java.util.List;
  * Created by Ancarian on 22.10.2017.
  */
 
+
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/users")
 @Api(value = "/users", description = "User controller")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequiredArgsConstructor
 public class UserController {
-    private UserInformationService userInformationService;
-    private UserService userService;
+    private final UserInformationService userInformationService;
+    private final AuthenticationServiceImpl authenticationService;
+    private final UserService userService;
 
-    @Autowired
-    public UserController(UserInformationService userInformationService, UserService userService) {
-        this.userInformationService = userInformationService;
-        this.userService = userService;
-    }
 
     @PreAuthorize("hasAuthority('USER')")
     @ApiOperation(value = "add request")
-    @RequestMapping(value = "/{userId}/{groupId}", method = RequestMethod.PUT, name = "")
-    public ResponseEntity<UserDto> addRequest(@PathVariable(value = "userId") long userId, @PathVariable(value = "groupId") long groupId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (userInformationService.findByNickname(authentication.getName()).getId() != userId) {
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-
-        userService.selectGroup(userId, groupId);
-        return new ResponseEntity<>(userService.findById(userId), HttpStatus.OK);
+    @RequestMapping(value = "/{groupId}", method = RequestMethod.PUT, name = "")
+    public ResponseEntity addRequest(@PathVariable(value = "groupId") long groupId) {
+        userService.selectGroup(authenticationService.getMyId(), groupId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -81,20 +71,12 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @ApiOperation(value = "update user")
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity updateUser(@Valid @RequestBody ProfileUserDto userDto) {
+        userDto.setId(authenticationService.getMyId());
         userService.update(userDto);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PreAuthorize("isAuthenticated()")
-    @ApiOperation(value = "get profile user")
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public ResponseEntity<ProfileUserDto> getProfile() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = authentication.getName();
-        return new ResponseEntity<>(userService.findProfileById(userInformationService.findByNickname(currentUserName).getId()), HttpStatus.OK);
     }
 }

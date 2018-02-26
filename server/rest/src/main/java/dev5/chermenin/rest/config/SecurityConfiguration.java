@@ -28,14 +28,21 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private static final String[] allowedUrlsForPost = new String[]{"/auth/login"};
+    private static final String[] AUTH_POST_RESPONSE_WHITELIST = new String[]{"/auth/login"};
 
-    private static final String[] AUTH_WHITELIST = {
+    private static final String[] AUTH_SWAGGER_WHITELIST = {
             // -- swagger ui
             "/swagger-resources/**",
             "/swagger-ui.html",
             "/v2/api-docs",
             "/webjars/**",
+    };
+
+    private static final String[] AUTH_GET_RESPONSE_WHITELIST = {
+            "/groups/**",
+            "/subjects/**",
+            "/faculties/**",
+            "/universities/**"
     };
 
     private final UserDetailsService userDetailsService;
@@ -110,7 +117,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(AUTH_WHITELIST)
+                .antMatchers(AUTH_SWAGGER_WHITELIST)
                 .permitAll()
                 .and()
                 .csrf().disable()
@@ -124,10 +131,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers(HttpMethod.POST, allowedUrlsForPost)
-                .antMatchers(AUTH_WHITELIST)
-                .antMatchers(HttpMethod.GET,"/groups/**")
-                .antMatchers(HttpMethod.GET, "/groups/{\\d+}");
+                .antMatchers(HttpMethod.POST, AUTH_POST_RESPONSE_WHITELIST)
+                .antMatchers(AUTH_SWAGGER_WHITELIST)
+                .antMatchers(HttpMethod.GET, AUTH_GET_RESPONSE_WHITELIST)
+                .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
 }

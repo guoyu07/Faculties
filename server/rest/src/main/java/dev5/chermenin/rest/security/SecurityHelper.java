@@ -3,7 +3,6 @@ package dev5.chermenin.rest.security;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-
 public class SecurityHelper {
 
     public static Authentication getAuthenticationWithCheck() {

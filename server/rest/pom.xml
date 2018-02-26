@@ -18,6 +18,13 @@
 
     <dependencies>
 
+        <!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.19</version>
+        </dependency>
+
         <dependency>
             <groupId>dev5.chermenin</groupId>
             <artifactId>model</artifactId>

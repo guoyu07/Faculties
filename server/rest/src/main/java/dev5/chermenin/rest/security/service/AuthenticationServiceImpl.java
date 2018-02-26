@@ -2,11 +2,11 @@ package dev5.chermenin.rest.security.service;
 
 import dev5.chermenin.dao.repository.UserInformationRepository;
 import dev5.chermenin.rest.security.SecurityHelper;
-import dev5.chermenin.rest.security.model.JwtAuthenticationToken;
 import dev5.chermenin.rest.security.model.JwtUserDetails;
 import dev5.chermenin.service.api.UserService;
 import dev5.chermenin.service.dto.impl.login.LoginRequestDto;
 import dev5.chermenin.service.dto.impl.login.LoginResponseDto;
+import dev5.chermenin.service.dto.impl.user.ProfileUserDto;
 import dev5.chermenin.service.dto.impl.user.UserDto;
 import dev5.chermenin.service.util.converters.impl.UserConverter;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,6 @@ public class AuthenticationServiceImpl {
 
     public LoginResponseDto login(final LoginRequestDto loginRequestDto) {
         try {
-            System.out.println(loginRequestDto);
             String username = Optional.ofNullable(loginRequestDto.getUsername())
                     .orElseThrow(() -> new BadCredentialsException("Username should be passed."));
             String password = Optional.ofNullable(loginRequestDto.getPassword())
@@ -50,15 +49,12 @@ public class AuthenticationServiceImpl {
             // Set generated JWT token to response header
             if (authResult.isAuthenticated()) {
                 JwtUserDetails userDetails = (JwtUserDetails) authResult.getPrincipal();
-
                 UserDto user = userService.findById(userDetails.getId());
                 if (Objects.isNull(user)) {
                     throw new RuntimeException("User not exist in system.");
                 }
-                JwtAuthenticationToken tokenn = new JwtAuthenticationToken(userDetails);
 
                 String token = this.authenticationHelper.generateToken(userDetails);
-
                 return new LoginResponseDto(token);
             } else {
                 throw new RuntimeException("Authentication failed.");
@@ -70,10 +66,15 @@ public class AuthenticationServiceImpl {
     }
 
     @Transactional(readOnly = true)
-    public UserDto getMe() {
+    public ProfileUserDto getMe() {
+        Authentication authentication = SecurityHelper.getAuthenticationWithCheck();
+        return userService.findProfileById(userInformationRepository.findByNickname(authentication.getName()).getId());
+    }
+
+    @Transactional(readOnly = true)
+    public Long getMyId() {
         Authentication authentication = SecurityHelper.getAuthenticationWithCheck();
         UserDto byUsername = userService.findById(userInformationRepository.findByNickname(authentication.getName()).getId());
-
-        return byUsername;
+        return byUsername.getId();
     }
 }
