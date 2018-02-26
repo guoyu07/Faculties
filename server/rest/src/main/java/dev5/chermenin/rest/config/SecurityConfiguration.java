@@ -131,9 +131,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring()
+<<<<<<< HEAD
                 .antMatchers(HttpMethod.POST, AUTH_POST_RESPONSE_WHITELIST)
                 .antMatchers(AUTH_SWAGGER_WHITELIST)
                 .antMatchers(HttpMethod.GET, AUTH_GET_RESPONSE_WHITELIST)
+=======
+                .antMatchers(HttpMethod.POST, allowedUrlsForPost)
+                .antMatchers(AUTH_WHITELIST)
+                .antMatchers(HttpMethod.GET,"/groups/**")
+                .antMatchers(HttpMethod.GET, "/groups/{\\d+}")
+>>>>>>> 12449e3342ac88a8b3fc13cac2a1b71d0a37254d
                 .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
