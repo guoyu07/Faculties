@@ -30,7 +30,8 @@ public class RoleController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "add role to user")
     @RequestMapping(value = "/{user_id}/{user_role}", method = RequestMethod.PUT)
-    public ResponseEntity addRoleToUser(@PathVariable(value = "user_id") long user_id, @PathVariable(value = "user_role") String user_role) {
+    public ResponseEntity addRoleToUser(@PathVariable(value = "user_id") long user_id,
+                                        @PathVariable(value = "user_role") String user_role) {
         roleService.addRoleToUser(user_id, Roles.valueOf(user_role));
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -38,7 +39,8 @@ public class RoleController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @ApiOperation(value = "remove user role")
     @RequestMapping(value = "/{user_id}/{user_role}", method = RequestMethod.DELETE)
-    public ResponseEntity removeUserRole(@PathVariable(value = "user_id") long user_id, @PathVariable(value = "user_role") String user_role) {
+    public ResponseEntity removeUserRole(@PathVariable(value = "user_id") long user_id,
+                                         @PathVariable(value = "user_role") String user_role) {
         roleService.removeUserRole(user_id, Roles.valueOf(user_role));
         return new ResponseEntity<>(HttpStatus.OK);
     }

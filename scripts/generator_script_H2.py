@@ -7,9 +7,9 @@ LASTNAMES = ['Smith', 'Jones', 'Brown', 'Johnson', 'Wilson', 'Miller', 'Green', 
 PATRONYMICS = ['Smith', 'Jones', 'Brown', 'Johnson', 'Wilson', 'Miller', 'Green', 'Scott', 'Wood', 'Adams', 'Turner']
 SUBJECTS = ['certificate', 'math', 'biology', 'geography', 'english', 'russian', 'history']
 
-UNIVERSITIES_COUNT = 3
-FACULTIES_COUNT = 3
-GROUPS_COUNT = 3
+UNIVERSITIES_COUNT = 1
+FACULTIES_COUNT = 4
+GROUPS_COUNT = 30
 USERS_COUNT = 1000
 
 def get_insert_template(template=""):
@@ -122,18 +122,17 @@ def generate_users(count=1):
 
 def generate_user_roles(count=1):
     def generate_role(index=1):
-        query = "({0},{1}), ".format(2, index)
+        query = "({0},{1}), ".format(0, index)
         if randint(1, 4) > 1:
-            query += "({0},{1}), ".format(3, index)
+            query += "({0},{1}), ".format(2, index)
         return query
 
-    template = get_insert_template('user_information_roles (roles_id, users_id) VALUES')
+    template = get_insert_template('user_information_roles (ROLES, USER_INFORMATION_ID) VALUES')
     return generate_query(template, generate_role, count)
 
 
 if __name__ == '__main__':
 
-    print(generate_roles(len(ROLES)))
     print(generate_subjects(len(SUBJECTS)))
     print(generate_universities(UNIVERSITIES_COUNT))
     print(generate_faculties(FACULTIES_COUNT))

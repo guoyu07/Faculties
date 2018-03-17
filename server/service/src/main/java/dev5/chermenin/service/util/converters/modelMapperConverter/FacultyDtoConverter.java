@@ -8,7 +8,7 @@ import dev5.chermenin.model.entity.impl.Subject;
 import dev5.chermenin.model.entity.impl.User;
 import dev5.chermenin.service.dto.impl.FacultyDto;
 import dev5.chermenin.service.dto.impl.GroupDto;
-import dev5.chermenin.service.dto.impl.user.UserScoreDto;
+
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;

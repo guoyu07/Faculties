@@ -50,13 +50,13 @@ public class SubjectController {
     }
 
     @ApiOperation(value = "find subject by id")
-    @RequestMapping(value = "/{subjectId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/{subjectId}", method = RequestMethod.GET)
     public ResponseEntity<SubjectDto> findSubjectById(@PathVariable(value = "subjectId") long id) {
         return new ResponseEntity<>(subjectService.findById(id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "find subject by name")
-    @RequestMapping(value = "/{subjectName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/name/{subjectName}", method = RequestMethod.GET)
     public ResponseEntity<SubjectDto> findSubjectByName(@PathVariable(value = "subjectName") String subjectName) {
         return new ResponseEntity<>(subjectService.findByName(subjectName), HttpStatus.OK);
     }

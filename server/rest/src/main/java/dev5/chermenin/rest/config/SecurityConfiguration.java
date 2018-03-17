@@ -28,10 +28,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private static final String[] AUTH_POST_RESPONSE_WHITELIST = new String[]{"/auth/login"};
+    private static final String[] AUTH_POST_RESPONSE_WHITELIST = new String[]{"/auth/login", "/auth/sign_up"};
 
     private static final String[] AUTH_SWAGGER_WHITELIST = {
-            // -- swagger ui
             "/swagger-resources/**",
             "/swagger-ui.html",
             "/v2/api-docs",
@@ -57,9 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureAuthentication(final AuthenticationManagerBuilder authenticationManagerBuilder)
             throws Exception {
-        authenticationManagerBuilder
-                .userDetailsService(this.userDetailsService)
-                .passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

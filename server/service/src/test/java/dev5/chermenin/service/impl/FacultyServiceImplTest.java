@@ -30,8 +30,10 @@ public class FacultyServiceImplTest {
     }
 
     @Test
+
     public void findAll() {
         assertEquals(Long.valueOf(facultyService.findAll(pageable).size()), (Long) 1L);
+
     }
 
     @Test

@@ -15,14 +15,15 @@ import java.util.Set;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
-    @Query("SELECT subject FROM Subject subject WHERE subject.subject = :name")
-    Subject findByName(@Param("name") String name);
+    Subject findBySubject(@Param("subject") String subject);
 
-    @Query(value = "SELECT subject.*, users_subjects.MARK FROM SUBJECTS subject\n" +
-            "        JOIN users_subjects ON SUBJECTS_ID = subject.id WHERE users_id = :userId", nativeQuery = true)
+    @Query(value =
+            "SELECT subject.*, users_subjects.MARK FROM SUBJECTS subject\n" +
+                    "        JOIN users_subjects ON SUBJECTS_ID = subject.id WHERE users_id = :userId", nativeQuery = true)
     Set<Subject> getSubjectByUser(@Param("userId") long id);
 
-    @Query(value = "SELECT subject.* FROM SUBJECTS subject\n" +
-            "        JOIN GROUPS_SUBJECTS ON SUBJECTS_ID = subject.id WHERE GROUPS_ID = :groupId", nativeQuery = true)
+    @Query(value =
+            "SELECT subject.* FROM SUBJECTS subject\n" +
+                    "        JOIN GROUPS_SUBJECTS ON SUBJECTS_ID = subject.id WHERE GROUPS_ID = :groupId", nativeQuery = true)
     Set<Subject> getSubjectByGroup(@Param("groupId") long groupId);
 }

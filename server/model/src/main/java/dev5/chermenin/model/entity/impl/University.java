@@ -11,7 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "universities")
+@Table(name = "universities", indexes = {@Index(name = "id_index_universities",  columnList="id", unique = true)})
 public class University extends BaseObject {
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)

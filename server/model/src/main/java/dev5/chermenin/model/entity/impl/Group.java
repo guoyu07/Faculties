@@ -3,6 +3,8 @@ package dev5.chermenin.model.entity.impl;
 import dev5.chermenin.model.entity.BaseObject;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "groups")
+@Table(name = "groups", indexes = {@Index(name = "id_index_groups",  columnList="id", unique = true)})
 @Getter
 @Setter
 public class Group extends BaseObject {

@@ -31,7 +31,7 @@
         </div>
         <div class="card-action">
           <span>User's score list: </span><span *ngFor="let user of group.users ; let rowIndex=index"
-                                                [ngClass]="{'score': group.limit>rowIndex, 'loh': group.limit <= rowIndex}"> {{user.score}}</span>
+                                                [ngClass]="{'score': group.limit>rowIndex, 'loh': group.limit <= rowIndex}"> {{user}}</span>
         </div>
       </div>
     </div>

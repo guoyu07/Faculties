@@ -27,5 +27,8 @@ public class UserDto extends Dto {
     private String patronymic;
 
     private Set<SubjectScoreDto> marks;
+
+    @JsonIgnore
+    private UserInformationDto userInformationDto;
 }
 

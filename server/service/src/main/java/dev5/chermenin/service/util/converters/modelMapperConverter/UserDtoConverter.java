@@ -34,7 +34,7 @@ public class UserDtoConverter extends ConverterConfigurerSupport<User, UserDto> 
             protected UserDto convert(User source) {
                 UserDto dto = new UserDto();
                 Set<SubjectScoreDto> subjectScoreDtoSet = new HashSet<>();
-                for (Map.Entry<Subject, Integer> marks:source.getSubjects().entrySet()) {
+                for (Map.Entry<Subject, Integer> marks: source.getSubjects().entrySet()) {
                     SubjectScoreDto subjectScoreDto = new SubjectScoreDto();
                     subjectScoreDto.setScore(marks.getValue());
                     subjectScoreDto.setSubject(marks.getKey().getSubject());
@@ -47,6 +47,7 @@ public class UserDtoConverter extends ConverterConfigurerSupport<User, UserDto> 
                     dto.setGroupId(source.getGroup().getId());
                 }
 
+                dto.setMarks(subjectScoreDtoSet);
                 dto.setName(source.getName());
                 dto.setLastname(source.getLastname());
                 dto.setPatronymic(source.getPatronymic());

@@ -2,6 +2,7 @@ package dev5.chermenin.rest.controller.exceptionController;
 
 import dev5.chermenin.service.exceptions.ExistsException;
 import dev5.chermenin.service.exceptions.NotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,11 @@ import java.sql.Timestamp;
 @ResponseBody
 public class RestResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {NotFoundException.class})
+    @ExceptionHandler(value = {NullPointerException.class, EmptyResultDataAccessException.class})
     protected ResponseEntity<Object> handleNotFound(RuntimeException ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
         ExceptionDto exceptionDto = new ExceptionDto(ex);
+        exceptionDto.setMessage("not found :(");
         return new ResponseEntity<>(exceptionDto, headers, HttpStatus.NOT_FOUND);
     }
 
@@ -39,6 +41,7 @@ public class RestResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleIllegalArgument(RuntimeException ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
         ExceptionDto exceptionDto = new ExceptionDto(ex);
+        exceptionDto.setMessage("not found");
         return new ResponseEntity<>(exceptionDto, headers, HttpStatus.BAD_REQUEST);
     }
 

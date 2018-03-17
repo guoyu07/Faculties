@@ -1,6 +1,7 @@
 package dev5.chermenin.service.api;
 
 import dev5.chermenin.service.dto.impl.user.ProfileUserDto;
+import dev5.chermenin.service.dto.impl.user.RegisterDto;
 import dev5.chermenin.service.dto.impl.user.UserDto;
 import org.springframework.data.domain.Pageable;
 
@@ -12,7 +13,7 @@ public interface UserService {
 
     ProfileUserDto findProfileById(long id);
 
-    ProfileUserDto save(ProfileUserDto profileUserDto);
+    RegisterDto save(RegisterDto profileUserDto);
 
     List<UserDto> findAll(Pageable pageable);
 
@@ -23,8 +24,6 @@ public interface UserService {
     void update(ProfileUserDto profileUserDto);
 
     void removeAll();
-
-    List<UserDto> getVerifiedUsersInGroup(long id);
 
     void selectGroup(long userId, long groupId);
 

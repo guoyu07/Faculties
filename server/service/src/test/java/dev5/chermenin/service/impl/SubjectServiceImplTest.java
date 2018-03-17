@@ -40,13 +40,6 @@ public class SubjectServiceImplTest {
         SubjectDto subjectDto = subjectService.findById(2L);
         assertEquals(subjectDto.getSubject(), "math");
         assertEquals(subjectDto.getId(), (Long) 2L);
-
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void findByNotExistId() throws Exception {
-        SubjectDto subjectDto = subjectService.findById(100L);
-        assertNull(subjectDto);
     }
 
     @Test
@@ -54,16 +47,6 @@ public class SubjectServiceImplTest {
         SubjectDto subjectDto = subjectService.findByName("math");
         assertEquals(subjectDto.getSubject(), "math");
         assertEquals(subjectDto.getId(), (Long) 2L);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void findByNotExistName() throws Exception {
-        subjectService.findByName("userrr");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void findByIncorrectName() throws Exception {
-        subjectService.findByName(null);
     }
 
     @Test
@@ -74,23 +57,6 @@ public class SubjectServiceImplTest {
 
         assertEquals(subjectDto.getId(), subjectService.findByName("engl").getId());
         subjectService.remove(subjectDto.getId());
-    }
-
-    @Test(expected = ExistsException.class)
-    public void saveExistsSubjectDto() throws Exception {
-        SubjectDto subjectDto = new SubjectDto();
-        subjectDto.setSubject("math");
-        subjectService.save(subjectDto);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void saveIncorrectSubjectDto() throws Exception {
-        subjectService.save(null);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void removeSubjectDto() throws Exception {
-        subjectService.remove(100L);
     }
 
     @Test
@@ -105,30 +71,10 @@ public class SubjectServiceImplTest {
         assertTrue(userRepository.findOne(13L).getSubjects().containsKey(subjectRepository.findOne(1L)));
     }
 
-    @Test(expected = NotFoundException.class)
-    public void addNotExistsSubjectToUser() {
-        subjectService.addSubjectToUser(13, 100, 100);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void addSubjectToNotExistsUser() {
-        subjectService.addSubjectToUser(130, 1, 100);
-    }
-
     @Transactional
     @Test
     public void removeUserSubject() {
         subjectService.removeUserSubject(13, 3);
         assertTrue(!userRepository.findOne(13L).getSubjects().containsKey(subjectRepository.findOne(3L)));
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void removeNotExistsSubjectToUser() {
-        subjectService.removeUserSubject(13, 100);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void removeSubjectFromNotExistsUser() {
-        subjectService.removeUserSubject(130, 1);
     }
 }

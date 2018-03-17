@@ -1,17 +1,22 @@
-<div class="row">
-  <div class="col-md-4">
-    <h1>Register</h1>
-    <hr><br>
-    <form (ngSubmit)="onRegister()" novalidate>
-     <div class="form-group">
-       <label for="email">Email</label>
-       <input type="text" class="form-control" id="email" placeholder="enter email" [(ngModel)]="user.email" name="email" required>
-     </div>
-     <div class="form-group">
-       <label for="password">Password</label>
-       <input type="password" class="form-control" id="password" placeholder="enter password" [(ngModel)]="user.password" name="password" required>
-     </div>
-     <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-  </div>
+<div class="login">
+  <div class="login-triangle"></div>
+
+  <h2 class="login-header">Sign up</h2>
+
+  <form (ngSubmit)="onRegister()" novalidate class="login-container">
+
+    <p><input type="password" placeholder="Email" [(ngModel)]="user.email" name="password" required></p>
+
+    <p><input type="email" placeholder="Name" [(ngModel)]="user.name" name="email" required></p>
+
+    <p><input type="email" placeholder="Lastname" [(ngModel)]="user.lastname" name="email" required></p>
+
+    <p><input type="email" placeholder="Patronymic" [(ngModel)]="user.patronymic" name="email" required></p>
+
+    <p><input type="password" placeholder="Nickname" [(ngModel)]="user.nickname" name="password" required></p>
+
+    <p><input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required></p>
+
+    <button type="submit" class="btn green center">Log in</button>
+  </form>
 </div>

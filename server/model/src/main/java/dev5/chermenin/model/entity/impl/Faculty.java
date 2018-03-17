@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "faculties")
+@Table(name = "faculties", indexes = {@Index(name = "id_index_faculties",  columnList="id", unique = true)})
 public class Faculty extends BaseObject {
 
     @Column(name = "name", unique = true, nullable = false)

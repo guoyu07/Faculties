@@ -5,10 +5,8 @@ import dev5.chermenin.model.entity.impl.Group;
 import dev5.chermenin.model.entity.impl.User;
 import dev5.chermenin.service.dto.impl.GroupDto;
 import dev5.chermenin.service.dto.impl.user.UserDto;
-import dev5.chermenin.service.dto.impl.user.UserScoreDto;
 import dev5.chermenin.service.util.converters.modelMapperConverter.GroupDtoConverter;
 import dev5.chermenin.service.util.converters.modelMapperConverter.UserDtoConverter;
-import dev5.chermenin.service.util.converters.modelMapperConverter.UserScoreDtoConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,7 +39,7 @@ public class Application extends WebMvcConfigurerAdapter {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.createTypeMap(User.class, UserDto.class).setConverter(new UserDtoConverter(modelMapper).converter());
         modelMapper.createTypeMap(Group.class, GroupDto.class).setConverter(new GroupDtoConverter(modelMapper).converter());
-        modelMapper.createTypeMap(User.class, UserScoreDto.class).setConverter(new UserScoreDtoConverter().converter());
+
         return modelMapper;
     }
 

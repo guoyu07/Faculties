@@ -9,6 +9,5 @@ import java.io.Serializable;
 @Setter
 public class Dto implements Serializable {
     private Long id;
-
 }
 

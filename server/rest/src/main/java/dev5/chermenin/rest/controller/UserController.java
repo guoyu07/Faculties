@@ -53,7 +53,8 @@ public class UserController {
     @ApiOperation(value = "find user by name")
     @RequestMapping(value = "/name/{userName}", method = RequestMethod.GET)
     public ResponseEntity<UserDto> findByName(@PathVariable(value = "userName") String userName) {
-        return new ResponseEntity<>(userService.findById(userInformationService.findByNickname(userName).getId()), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findById(userInformationService.findByNickname(userName).getId()),
+                HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

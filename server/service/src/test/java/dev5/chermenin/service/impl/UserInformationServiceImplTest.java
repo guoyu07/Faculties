@@ -34,11 +34,6 @@ public class UserInformationServiceImplTest {
         assertEquals(infoService.findById(1L).getId(), new Long(1));
     }
 
-    @Test(expected = NotFoundException.class)
-    public void findByNotExistsId() throws Exception {
-        infoService.findById(1000L);
-    }
-
     @Test
     public void findByNickname() throws Exception {
         assertEquals(infoService.findByNickname("nickname_1").getNickname(), "nickname_1");
@@ -49,54 +44,27 @@ public class UserInformationServiceImplTest {
         infoService.findByNickname("NotExistNick");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void findByNullNickname() throws Exception {
-        assertEquals(infoService.findByNickname(null), null);
-    }
-
     @Test
     public void findByEmail() throws Exception {
         assertEquals(infoService.findByEmail("email_1").getEmail(), "email_1");
     }
 
-    @Test(expected = NotFoundException.class)
-    public void findByNonexistentEmail() throws Exception {
-        assertEquals(infoService.findByEmail("NotExistEmail"), null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void findByNullEmail() throws Exception {
-        assertEquals(infoService.findByEmail(null), null);
-    }
-    @Test(expected = NotFoundException.class)
-    public void changeEmailNotExistUserInformation(){
-
-        infoService.changeEmail(1000L, "oldEmail@gmail.com", "newEmail@gmail.com");
-    }
-    @Test(expected = ExistsException.class)
-    public void changeExistsEmailUserInformation(){
-
-        infoService.changeEmail(1L, "oldEmail@gmail.com", "email_1");
-    }
-    @Test(expected = ConflictException.class)
-    public void changeInvalidEmailUserInformation(){
-        infoService.changeEmail(2L, "invalidOldEmail@gmail.com", "newEmail@gmail.com");
-    }
     @Test
     public void changeEmailUserInformation(){
         infoService.changeEmail(2L, "oldEmail@gmail.com", "newEmail@gmail.com");
         assertEquals(infoService.findById(2L).getEmail(), "newEmail@gmail.com");
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test(expected = NullPointerException.class)
     public void changePasswordNotExistUserInformation(){
-
         infoService.changePassword(1000L, "oldPassword", "newPassword");
     }
+
     @Test(expected = ConflictException.class)
     public void changeInvalidPasswordUserInformation(){
         infoService.changePassword(2L, "invalidOldPassword", "newPassword");
     }
+
     @Test
     public void changePasswordUserInformation(){
         infoService.changePassword(2L, "oldPassword", "newPassword");

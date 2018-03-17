@@ -12,14 +12,14 @@ export class HeaderComponent implements OnInit {
 
   isAdmin: boolean;
   private jwtService: JwtService;
-  private token: string;
+  private token: String;
 
   constructor(jwtService: JwtService) {
     this.jwtService = jwtService;
 
   }
   ngOnInit() {
-    this.token = this.getToken();
+    this.token = this.jwtService.getToken();
     this.isAdmin = this.jwtService.isAdmin();
   }
 

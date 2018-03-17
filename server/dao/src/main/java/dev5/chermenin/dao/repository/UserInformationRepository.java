@@ -13,12 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserInformationRepository extends JpaRepository<UserInformation, Long> {
 
-    @Query("SELECT info FROM UserInformation info WHERE info.email = :email")
     UserInformation findByEmail(@Param("email") String email);
 
-    @Query("SELECT info FROM UserInformation info WHERE info.nickname = :nickname")
     UserInformation findByNickname(@Param("nickname") String nickname);
 
-    @Query("SELECT info FROM UserInformation info WHERE info.password = :password")
-    UserInformation findByPassword(@Param("password") String password);
 }

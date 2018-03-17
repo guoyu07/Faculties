@@ -19,14 +19,16 @@ export class UserService {
   }
 
   findAll(): Observable<User[]> {
-    return this.http.get(this.apiUrl, {headers: this.headers});
+    return this.http.get(this.apiUrl, {headers: this.headers})
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   findById(id: number): Observable<User> {
-    return this.http.get(this.apiUrl + '/id/' + id, {headers: this.headers});
+    return this.http.get(this.apiUrl + '/id/' + id, {headers: this.headers})
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  saveUser(user: User): Observable<Object> {
+  saveUser(user: User): Observable<User> {
     return this.http.post(this.apiUrl, user)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

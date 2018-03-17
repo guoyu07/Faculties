@@ -4,7 +4,7 @@ export class Group {
   id: number;
   information: string;
   limit: number;
-  users: UserScore[];
+  users: number[];
   enrollMark: number;
   facultyId: number;
   issueDate: Date;

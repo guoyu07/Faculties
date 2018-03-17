@@ -19,7 +19,9 @@ spring:
 server:
      port: 9000
 
-jwt.token.secret: ChangeMeToSomethingElse
+jwt:
+  token:
+    secret: ChangeMeToSomethingElse
 
 logging.level.org.hibernate.SQL.: DEBUG
 logging.file: myapplication.log

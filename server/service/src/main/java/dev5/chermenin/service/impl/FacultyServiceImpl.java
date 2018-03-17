@@ -5,7 +5,6 @@ import dev5.chermenin.dao.repository.UniversityRepository;
 import dev5.chermenin.model.entity.impl.Faculty;
 import dev5.chermenin.service.api.FacultyService;
 import dev5.chermenin.service.dto.impl.FacultyDto;
-import dev5.chermenin.service.exceptions.NotFoundException;
 import dev5.chermenin.service.util.converters.Converter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -25,12 +24,9 @@ public class FacultyServiceImpl implements FacultyService {
     @Transactional(readOnly = true)
     @Override
     public FacultyDto findById(Long id) {
-        if (facultyRepository.exists(id)) {
-            Faculty faculty = facultyRepository.findOne(id);
-            faculty.getGroups().forEach(group -> group.setUsers(null));
-            return facultyConverter.convertToDto(faculty);
-        }
-        throw new NotFoundException("faculty not found");
+        Faculty faculty = facultyRepository.findOne(id);
+        faculty.getGroups().forEach(group -> group.setUsers(null));
+        return facultyConverter.convertToDto(faculty);
     }
 
     @Transactional(readOnly = true)
@@ -39,6 +35,7 @@ public class FacultyServiceImpl implements FacultyService {
         List<Faculty> faculties = facultyRepository.findAll(pageable).getContent();
         faculties.forEach(group -> group.setGroups(null));
         return facultyConverter.convertToDto(faculties);
+
     }
 
     @Override
@@ -53,22 +50,19 @@ public class FacultyServiceImpl implements FacultyService {
 
     @Override
     public FacultyDto save(FacultyDto facultyDto) {
-        if (facultyDto == null) {
-            throw new IllegalArgumentException("user can't be null");
-        }
-
         Faculty faculty = new Faculty();
-        faculty.setGroups(null);
-        faculty.setId(null);
         faculty.setInformation(facultyDto.getInformation());
         faculty.setName(facultyDto.getName());
         faculty.setUniversity(universityRepository.findOne(facultyDto.getUniversityId()));
-
         return facultyConverter.convertToDto(facultyRepository.save(faculty));
     }
 
+    @Transactional
     @Override
-    public void update(FacultyDto id) {
+    public void update(FacultyDto dto) {
+        Faculty faculty = facultyRepository.findOne(dto.getId());
 
+        faculty.setName(dto.getName());
+        faculty.setInformation(dto.getInformation());
     }
 }

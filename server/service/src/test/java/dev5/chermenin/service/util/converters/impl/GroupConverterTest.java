@@ -43,7 +43,7 @@ public class GroupConverterTest {
 
         when(userConverter.convertToDto(anyListOf(User.class))).thenReturn(new ArrayList<>());
         when(userConverter.convertToEntity(anyListOf(UserDto.class))).thenReturn(new ArrayList<>());
-        when(subjectRepository.findByName("math")).thenReturn(generateSubject());
+        when(subjectRepository.findBySubject("math")).thenReturn(generateSubject());
 
         groupConverter = new GroupConverter(modelMapper);
     }

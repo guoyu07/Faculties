@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -44,7 +45,7 @@ public class GroupController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'MODERATOR')")
     @ApiOperation(value = "save new group")
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<GroupDto> addGroup(@Valid @RequestBody GroupDto groupDto) {
+    public ResponseEntity<GroupDto> addGroup(@Valid @NotNull @RequestBody GroupDto groupDto) {
         return new ResponseEntity<>(groupService.save(groupDto), HttpStatus.CREATED);
     }
 
@@ -59,7 +60,7 @@ public class GroupController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'MODERATOR')")
     @ApiOperation(value = "update group")
     @RequestMapping(value = "/", method = RequestMethod.PUT)
-    public ResponseEntity updateGroup(@Valid @RequestBody GroupDto groupDto) {
+    public ResponseEntity updateGroup(@Valid @NotNull @RequestBody GroupDto groupDto) {
         groupService.update(groupDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

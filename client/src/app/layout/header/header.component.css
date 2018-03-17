@@ -1,6 +1,9 @@
 .container{
   margin: 0 auto;
 }
+.brand-logo{
+  padding-left: 10px;
+}
 
 .hide{
   display: none;

@@ -12,8 +12,12 @@ import java.util.Map;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "users", indexes = {@Index(name = "id_index_faculties",  columnList="id", unique = true)})
 public class User extends BaseObject {
+
+    public User() {
+        //System.out.println("user init");
+    }
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -30,10 +34,9 @@ public class User extends BaseObject {
 
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserInformation info;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "users_subjects", joinColumns = {@JoinColumn(name = "users_id")})
     @MapKeyJoinColumn(name = "subjects_id")
     @Column(name = "mark")

@@ -27,7 +27,7 @@ public class UserInformation extends BaseObject {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @ElementCollection(targetClass = Roles.class, fetch = FetchType.LAZY)
+    @ElementCollection(targetClass = Roles.class)
     @Enumerated(value = EnumType.ORDINAL)
     @CollectionTable(name = "user_information_roles", joinColumns = {@JoinColumn(name = "user_information_id")})
     @Column(name = "roles")

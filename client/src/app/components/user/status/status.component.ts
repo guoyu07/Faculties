@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {AuthService} from "../../../services/auth.service";
-import {User} from "../../../models/User";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../services/auth.service';
+import {User} from '../../../models/User';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'status',
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
-  user: User = new User;
+  user: User;
   error: {};
 
   constructor(private router: Router, private auth: AuthService) {

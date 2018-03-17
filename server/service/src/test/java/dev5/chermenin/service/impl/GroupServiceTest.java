@@ -1,5 +1,6 @@
 package dev5.chermenin.service.impl;
 
+import dev5.chermenin.dao.repository.GroupRepository;
 import dev5.chermenin.service.TestDataBaseConfig;
 import dev5.chermenin.service.api.GroupService;
 import dev5.chermenin.service.api.UserService;
@@ -10,8 +11,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -30,35 +34,15 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestDataBaseConfig.class)
-@ComponentScan(basePackages = {"dev5.chermenin"})
 public class GroupServiceTest{
     private final static Pageable pageable = new PageRequest(0,100);
     @Autowired
     private GroupService groupService;
-    @Autowired
-    private UserService userService;
 
     @Test
     public void findById() {
-        assertEquals(groupService.findById(1L).getId(), (Long) 1L);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void findByNotExistsId() {
-        groupService.findById(100L);
-    }
-
-    @Test(expected = ExistsException.class)
-    public void SaveGroupWithExistsInformation() {
-        GroupDto dto = new GroupDto();
-        dto.setInformation("group №3");
-
-        groupService.save(dto);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void saveNullGroup() {
-        groupService.save(null);
+        Long value = 1L;
+        assertEquals(groupService.findById(1L).getId(), value);
     }
 
     @Test
@@ -76,35 +60,12 @@ public class GroupServiceTest{
         groupService.remove(4L);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void updateNullGroup() {
-        groupService.update(null);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void updateNotExistsGroup() {
-        GroupDto groupDto = new GroupDto();
-        groupService.update(groupDto);
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void updateNotExistsGroupWithId() {
-        GroupDto groupDto = new GroupDto();
-        groupDto.setId(100L);
-        groupService.update(groupDto);
-    }
-
     @Test()
     public void updateGroup() {
         GroupDto groupDto = groupService.findById(1L);
         groupDto.setInformation("newGroup#1");
         groupService.update(groupDto);
         assertEquals(groupService.findById(1L).getInformation(), groupDto.getInformation());
-    }
-
-    @Test(expected = NotFoundException.class)
-    public void removeNotExistsGroup() {
-        groupService.remove(1000L);
     }
 
     @Ignore

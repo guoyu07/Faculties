@@ -12,9 +12,10 @@ import java.util.Set;
 @Setter
 public class UniversityDto extends Dto {
 
-    private Set<UserDto> moderators;
     @NotNull
     private String name;
+
+    private Set<UserDto> moderators;
 
     private Set<FacultyDto> faculties;
 }

@@ -21,11 +21,11 @@ export class GroupService {
   }
 
   findAll(): Observable<Group[]> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl) .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   findById(id: number): Observable<Group> {
-    return this.http.get(this.apiUrl + '/' + id);
+    return this.http.get(this.apiUrl + '/' + id) .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   saveGroup(group: Group): Observable<Object> {

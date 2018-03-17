@@ -27,7 +27,7 @@ export class UserListComponent implements OnInit {
           this.getAllUsers();
         })
         .catch((err) => {
-          this.error = err;
+          console.log(err);
         });
     }
   }

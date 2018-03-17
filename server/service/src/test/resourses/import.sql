@@ -7,7 +7,7 @@ INSERT INTO groups(id,ENROLL_MARK, COUNT_OF_USERS,COUNT_OF_ALL_USERS,INFORMATION
 INSERT INTO groups(id,ENROLL_MARK, COUNT_OF_USERS,COUNT_OF_ALL_USERS,INFORMATION,VALID_TILL,COUNT,ISSUE_DATE,FACULTIES_ID, QUALIFY)  VALUES (2,0,1,1, 'group №2', '2017-12-12', 3, '2018-12-12',1, 'programmer');
 INSERT INTO groups(id,ENROLL_MARK, COUNT_OF_USERS,COUNT_OF_ALL_USERS,INFORMATION,VALID_TILL,COUNT,ISSUE_DATE, FACULTIES_ID, QUALIFY)  VALUES (3,0,1,1, 'group №3', '2017-12-12', 3, '2018-12-12',1, 'medic');
 
-INSERT INTO groups_subjects VALUES (2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3);
+INSERT INTO groups_subjects VALUES (1, 1), (1, 2), (1, 3),(2, 1), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3);
 
 
 INSERT INTO users(name, lastname, patronymic, groups_id) VALUES ('username_1','username_1','username_1', 1), ('username_2','username_1','username_1', 1), ('username_3','username_1','username_1', 1), ( 'username_4','username_1','username_1', 1),('username_5','username_1','username_1', 1), ('username_6','username_1','username_1', 1), ('username_7','username_1','username_1', 2), ('username_8','username_1','username_1', 2),('username_9','username_1','username_1', 2), ('username_10','username_1','username_1', 2), ('username_11','username_1','username_1', 2), ('username_12','username_1','username_1', 2),('username_13','username_1','username_1', 1), ('username_14','username_1','username_1', 1), ('username_15','username_1','username_1', 1), ('username_16','username_1','username_1', NULL), ('username_17','username_1','username_1', Null);
@@ -39,3 +39,12 @@ ALTER TABLE PUBLIC.GROUPS_SUBJECTS ADD CONSTRAINT FKOJXXFM09OSDV6J9JDB59FLSA1 FO
 ALTER TABLE PUBLIC.USERS_SUBJECTS DROP CONSTRAINT FKMSLW7WMND17MFAL87LTS6H68D;
 ALTER TABLE PUBLIC.USERS_SUBJECTS ADD CONSTRAINT FKMSLW7WMND17MFAL87LTS6H68D FOREIGN KEY (USERS_ID) REFERENCES USERS (ID) ON DELETE CASCADE;
 ALTER TABLE PUBLIC.USERS_SUBJECTS DROP CONSTRAINT FK7BWCD3WPFHA2R4KK5K2MO8J55; ALTER TABLE PUBLIC.USERS_SUBJECTS ADD CONSTRAINT FK7BWCD3WPFHA2R4KK5K2MO8J55 FOREIGN KEY (SUBJECTS_ID) REFERENCES SUBJECTS (ID) ON DELETE CASCADE;
+
+
+CREATE INDEX FACULTIES_ID_index ON FACULTIES (ID);
+CREATE INDEX GROUPS_ID_index ON GROUPS (ID);
+CREATE INDEX USERS_ID_index ON USERS (ID);
+CREATE INDEX SUBJECTS_ID_index ON SUBJECTS (ID);
+CREATE INDEX USERS_SUBJECTS_USERS_ID_index ON USERS_SUBJECTS (USERS_ID);
+
+

@@ -9,11 +9,10 @@ import dev5.chermenin.service.dto.impl.FacultyDto;
 import dev5.chermenin.service.dto.impl.GroupDto;
 
 import dev5.chermenin.service.dto.impl.user.UserDto;
-import dev5.chermenin.service.dto.impl.user.UserScoreDto;
 import dev5.chermenin.service.util.converters.modelMapperConverter.FacultyDtoConverter;
 import dev5.chermenin.service.util.converters.modelMapperConverter.GroupDtoConverter;
 import dev5.chermenin.service.util.converters.modelMapperConverter.UserDtoConverter;
-import dev5.chermenin.service.util.converters.modelMapperConverter.UserScoreDtoConverter;
+
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableAutoConfiguration
@@ -32,6 +33,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "dev5.chermenin.dao.repository")
 @EnableCaching
 public class TestDataBaseConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public ModelMapper modelMapper() {
@@ -43,7 +49,6 @@ public class TestDataBaseConfig {
         modelMapper.createTypeMap(Group.class, GroupDto.class)
                 .setConverter(new GroupDtoConverter(modelMapper).converter());
 
-        modelMapper.createTypeMap(User.class, UserScoreDto.class).setConverter(new UserScoreDtoConverter().converter());
         modelMapper.createTypeMap(Faculty.class, FacultyDto.class).setConverter(new FacultyDtoConverter(modelMapper).converter());
 
 

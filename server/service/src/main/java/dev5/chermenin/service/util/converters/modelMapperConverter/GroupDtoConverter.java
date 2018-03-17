@@ -5,7 +5,7 @@ import dev5.chermenin.model.entity.impl.Group;
 import dev5.chermenin.model.entity.impl.Subject;
 import dev5.chermenin.model.entity.impl.User;
 import dev5.chermenin.service.dto.impl.GroupDto;
-import dev5.chermenin.service.dto.impl.user.UserScoreDto;
+
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -34,14 +34,6 @@ public class GroupDtoConverter extends ConverterConfigurerSupport<Group, GroupDt
             @Override
             protected GroupDto convert(Group source) {
                 GroupDto groupDto = new GroupDto();
-
-                if (source.getUsers() != null) {
-                    List<UserScoreDto> userDtoSet = new ArrayList<>();
-                    for (User user : source.getUsers()) {
-                        userDtoSet.add(modelMapper.map(user, UserScoreDto.class));
-                    }
-                    groupDto.setUsers(userDtoSet);
-                }
 
                 if (source.getSubjects() != null) {
                     groupDto.setSubjectNames(source.getSubjects().stream().map(Subject::getSubject).collect(toSet()));
